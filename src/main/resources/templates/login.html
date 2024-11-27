@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main>
+    <form data-th-action="@{/login}" method="post">
+        <h1>Connexion</h1>
+        <div data-th-if="param.error" data-th-text="Erreur"></div>
+        <div data-th-if="${param.logout}">Login logout</div>
+        <ul>
+            <li>
+                <label for="username">Nom</label>
+                <input id="username" type="text" name="username"/>
+            </li>
+            <li>
+                <label for="password">password</label>
+                <input id="password" type="text" name="password"/>
+            </li>
+        </ul>
+        <button type="submit">Envoyer</button>
+    </form>
+</main>
+
+</body>
+</html>
