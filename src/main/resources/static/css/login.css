@@ -1,0 +1,109 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: #f9f9f9;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #333;
+    color: white;
+}
+
+header #logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: 1rem;
+}
+
+/* Section principale */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Enlève la hauteur du header */
+}
+
+.login-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-form h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    text-align: left;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.login-form button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-form button:hover {
+    background: #555;
+}
+
+/* Liens supplémentaires */
+.extra-links {
+    margin-top: 1rem;
+}
+
+.extra-links a {
+    display: block;
+    color: #007BFF;
+    text-decoration: none;
+    margin: 0.5rem 0;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: white;
+    font-size: 0.9rem;
+}
