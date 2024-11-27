@@ -14,6 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -38,21 +39,28 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> {
             auth
-                    // Tous les rôles peuvent accéder à l'url racine (page d'accueil par xemple)
                     .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                    // Tous les rôles peuvent accéder à la page d'accueil et d'article
-                    .requestMatchers(HttpMethod.GET, "/article/").hasAnyRole("USER", "ADMIN")
-                    // Seul un admin peut créer un article
-                    .requestMatchers(HttpMethod.POST, "/article/creer").hasRole("ADMIN")
-                    // Seul un admin peut aller sur l'url admin
-                    .requestMatchers("/admin").hasRole("ADMIN")
-                    // Permettre à tout le monde d'afficher correctement images et css
+                    .requestMatchers(HttpMethod.GET, "/create-profile").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/article/").hasAnyRole("ADMIN")
                     .requestMatchers("/css/*").permitAll()
-                    .requestMatchers("/images/*").permitAll()
-                    // Toutes les autres url ne sont pas permises
+                    .requestMatchers("/pictures/*").permitAll()
                     .anyRequest().denyAll();
         });
-        http.formLogin(Customizer.withDefaults());
+
+        http.formLogin(form -> {
+            form.loginPage("/login").permitAll();
+            form.defaultSuccessUrl("/");
+        });
+
+        http.logout(logout -> logout
+                            .invalidateHttpSession(true)
+                            .clearAuthentication(true)
+                            .deleteCookies("JSESSIONID")
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                            .logoutSuccessUrl("/")
+                            .permitAll()
+                   );
+
         return http.build();
     }
 
