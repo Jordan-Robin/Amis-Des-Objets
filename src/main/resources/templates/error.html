@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: link}
+      )}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Erreur</title>
+    <link>
 </head>
-<body>
 
+<body>
 <main>
     <h1 data-th-text="erreur + ${status}"></h1>
     <ul>
@@ -17,7 +22,6 @@
         </li>
     </ul>
 </main>
-
-
 </body>
+
 </html>

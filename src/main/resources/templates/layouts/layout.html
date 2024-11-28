@@ -6,13 +6,11 @@
     <title data-th-replace="${title}"></title>
     <link data-th-replace="${ressources}">
 </head>
+
 <body>
-
-<div data-th-replace="~{fragments/fragment-header :: header}"></div>
-
-<main data-th-replace="${main}"></main>
-
-<div data-th-replace="~{fragments/fragment-footer :: footer}"></div>
-
+    <div data-th-replace="~{fragments/fragment-header :: header}"></div>
+    <main data-th-replace="${main}"></main>
+    <div data-th-replace="~{fragments/fragment-footer :: footer}"></div>
 </body>
+
 </html>
