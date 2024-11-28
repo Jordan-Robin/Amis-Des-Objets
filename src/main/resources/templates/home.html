@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+</head>
+<body>
+    <h1>Enchères Actives</h1>
+    <ul>
+        <li th:each="article : ${encheres}">
+            <h2 th:text="${article.nomArticle}"></h2>
+            <p th:text="${article.description}"></p>
+            <p>Prix initial : <span th:text="${article.prixInitial}"></span> €</p>
+            <p>Statut : En cours</p>
+        </li>
+    </ul>
+</body>
+</html>

@@ -2,9 +2,13 @@ package com.eni.amis.des.objets.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -24,5 +28,36 @@ public class SecurityConfig {
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLE);
         return jdbcUserDetailsManager;
     }
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth -> {
+            auth
+                    .requestMatchers(HttpMethod.GET, "/*").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/create-profile").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/article/").hasAnyRole("ADMIN")
+                    .requestMatchers("/css/*").permitAll()
+                    .requestMatchers("/pictures/*").permitAll()
+                    .anyRequest().denyAll();
+        });
+
+        http.formLogin(form -> {
+            form.loginPage("/login").permitAll();
+            form.defaultSuccessUrl("/");
+        });
+
+        http.logout(logout -> logout
+                            .invalidateHttpSession(true)
+                            .clearAuthentication(true)
+                            .deleteCookies("JSESSIONID")
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                            .logoutSuccessUrl("/")
+                            .permitAll()
+                   );
+
+        return http.build();
+    }
+
+
 
 }
