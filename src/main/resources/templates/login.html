@@ -1,44 +1,38 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: link}
+      )}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - ENI-Enchères</title>
     <link rel="stylesheet" data-th-href="@{css/login.css}">
 </head>
+
 <body>
-    <header>
-        <div id="logo">ENI-ENCHERES</div>
-        <nav>
-            <a href="/">Accueil</a>
-        </nav>
-    </header>
-
-    <main>
-        <section class="login-form">
-            <h1>Connexion</h1>
-            <div data-th-if="param.error" data-th-text="Erreur"></div>
-            <div data-th-if="${param.logout}">Login logout</div>
+<main>
+    <section class="login-form">
+        <h1>Connexion</h1>
+        <div data-th-if="param.error" data-th-text="Erreur"></div>
+        <div data-th-if="${param.logout}">Login logout</div>
+        
+        <form data-th-action="@{/login}" method="post">
+            <label for="username">Identifiant :</label>
+            <input type="text" id="username" name="username" placeholder="Votre identifiant" required>
             
-            <form data-th-action="@{/login}" method="post">
-                <label for="username">Identifiant :</label>
-                <input type="text" id="username" name="username" placeholder="Votre identifiant" required>
-
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
-
-                <button type="submit">Valider</button>
-
-                <div class="extra-links">
-                    <a href="#">Mot de passe oublié ?</a>
-                    <a href="#">Créer un compte</a>
-                </div>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 20XX ENI-Enchères. Tous droits réservés.</p>
-    </footer>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+            
+            <button type="submit">Valider</button>
+            
+            <div class="extra-links">
+                <a href="#">Mot de passe oublié ?</a>
+                <a href="#">Créer un compte</a>
+            </div>
+        </form>
+    </section>
+</main>
 </body>
+
 </html>

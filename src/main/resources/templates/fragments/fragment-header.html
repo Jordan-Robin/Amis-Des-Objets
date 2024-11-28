@@ -1,0 +1,14 @@
+<header data-th-fragment="header">
+    <div id="logo">ENI-Enchères</div>
+    <div>
+        <span data-th-text="${#authentication.name}"></span>
+    </div>
+    <nav>
+        <a href="/">Accueil</a>
+        <a href="/create-profile">S'inscrire</a>
+        <a href="/login">Se connecter</a>
+        <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#">Administration</a>
+        <a data-th-if="${#authorization.expression('isAuthenticated()')}" href="/logout">Se déconnecter</a>
+    </nav>
+    <div id="date">Date du jour : 22/04/20XX</div>
+</header>
