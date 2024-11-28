@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" data-th-fragment="layout(title, main, ressources)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-replace="${title}"></title>
+    <link data-th-replace="${ressources}">
+</head>
+<body>
+
+<div data-th-replace="~{fragments/fragment-header :: header}"></div>
+
+<main data-th-replace="${main}"></main>
+
+<div data-th-replace="~{fragments/fragment-footer :: footer}"></div>
+
+</body>
+</html>
