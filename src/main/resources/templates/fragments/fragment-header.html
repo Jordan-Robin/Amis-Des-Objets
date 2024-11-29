@@ -1,10 +1,14 @@
-<header data-th-fragment="header">
+<header xmlns:th="http://www.thymeleaf.org" data-th-fragment="header">
     <div id="logo">ENI-Enchères</div>
+    <div id="div-logo">
+        <a href="/?language=fr"><img alt="Français" data-th-src="@{/pictures/French.webp}"></a>
+        <a href="/?language=en"><img alt="English" data-th-src="@{/pictures/English.webp}"></a>
+    </div>
     <div>
         <span data-th-text="${#authentication.name}"></span>
     </div>
     <nav>
-        <a href="/">Accueil</a>
+        <a href="/" data-th-text="#{frag-header.a.accueil}"></a>
         <a href="/create-profile">S'inscrire</a>
         <a href="/login">Se connecter</a>
         <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#">Administration</a>

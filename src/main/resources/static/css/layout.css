@@ -28,6 +28,10 @@ header nav a {
     font-size: 1rem;
 }
 
+header #div-logo a>img {
+    width: 25px;
+}
+
 /* Footer */
 footer {
     text-align: center;
