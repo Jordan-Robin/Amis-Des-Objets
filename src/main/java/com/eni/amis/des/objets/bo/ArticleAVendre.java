@@ -4,7 +4,59 @@ import java.time.LocalDate;
 
 public class ArticleAVendre {
     private int noArticle;
-    private String nomArticle;
+    public int getNoArticle() {
+		return noArticle;
+	}
+
+	public String getNomArticle() {
+		return nomArticle;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getPhoto() {
+		return photo;
+	}
+
+	public LocalDate getDateDebutEncheres() {
+		return dateDebutEncheres;
+	}
+
+	public LocalDate getDateFinEncheres() {
+		return dateFinEncheres;
+	}
+
+	public int getStatutEnchere() {
+		return statutEnchere;
+	}
+
+	public int getPrixInitial() {
+		return prixInitial;
+	}
+
+	public int getPrixVente() {
+		return prixVente;
+	}
+
+	public String getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+	public int getNoAdresseRetrait() {
+		return noAdresseRetrait;
+	}
+	
+	public String getFormattedDate() {
+	    return formattedDate;
+	}
+
+	private String nomArticle;
 	private String description;
 	private int photo;
 	private LocalDate dateDebutEncheres;
@@ -15,6 +67,7 @@ public class ArticleAVendre {
 	private String idUtilisateur;
 	private int noCategorie;
 	private int noAdresseRetrait;
+	private String formattedDate;
 
     // Getters et Setters
     // toString, hashCode, equals si nécessaire
@@ -49,6 +102,14 @@ public class ArticleAVendre {
 
 	public void setPrixVente(int prixVente) {
 	    this.prixVente = prixVente;
+	}
+
+	public void setIdUtilisateur(String idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
+	}
+	
+	public void setFormattedDate(String formattedDate) {
+	    this.formattedDate = formattedDate;
 	}
 
 }

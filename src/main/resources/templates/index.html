@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENI-Enchères</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" th:href="@{css/index.css}">
 </head>
 <body>
     <header>
@@ -33,18 +33,24 @@
                 <button type="reset">Annuler</button>
             </form>
         </section>
+        
+        <section th:replace="encheresActives :: auctions"></section>
 
-        <section id="auctions">
+<!--         <section id="auctions">
             <h2>Liste des enchères</h2>
-            <div class="auction">
-                <img src="#" alt="Disque dur">
-                <h3>Disque Dur</h3>
-                <p>Prix : 1 point(s)</p>
-                <p>Fin de l'enchère : 01/06/20XX</p>
-                <p>Vendeur : coach_toto</p>
+            <div th:if="${#lists.isEmpty(encheres)}">
+                <p>Aucune enchère active pour le moment.</p>
             </div>
-            <!-- Répète cette structure pour les autres enchères -->
-        </section>
+            <div th:each="enchere : ${encheres}">
+                <div class="auction">
+                    <img src="#" alt="Image de l'article">
+                    <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
+                    <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
+					<p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
+                    <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
+                </div>
+            </div>
+        </section> -->
     </main>
 
     <footer>
