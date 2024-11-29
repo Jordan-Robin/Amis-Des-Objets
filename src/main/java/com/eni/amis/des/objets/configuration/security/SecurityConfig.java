@@ -42,17 +42,17 @@ public class SecurityConfig {
                     .anyRequest().denyAll();
         });
 
-        http.formLogin(form -> {
-            form.loginPage("/login").permitAll();
-            form.defaultSuccessUrl("/");
-        });
+        http.formLogin(form -> form
+            .loginPage("/login").permitAll()
+            .defaultSuccessUrl("/")
+        );
 
         http.logout(logout -> logout
                             .invalidateHttpSession(true)
                             .clearAuthentication(true)
                             .deleteCookies("JSESSIONID")
                             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            .logoutSuccessUrl("/")
+                            .logoutSuccessUrl("/?logout=true")
                             .permitAll()
                    );
 

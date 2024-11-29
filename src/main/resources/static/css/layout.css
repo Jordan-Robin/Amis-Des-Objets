@@ -6,6 +6,11 @@ body {
     background: #f9f9f9;
 }
 
+/* Erreurs */
+.error-text {
+    color: red;
+}
+
 /* Header */
 header {
     display: flex;
@@ -19,6 +24,8 @@ header {
 header #logo {
     font-size: 1.5rem;
     font-weight: bold;
+    text-decoration: none;
+    color: inherit;
 }
 
 header nav a {

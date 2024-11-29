@@ -20,6 +20,8 @@ public class Adresse {
     @Length(max = 50, message = "La ville ne doit pas faire plus de 50 caractères.")
     private String ville;
 
+    public Adresse() {}
+
     public Adresse(Long id, String rue, String codePostal, String ville) {
         this.id = id;
         this.rue = rue;

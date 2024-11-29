@@ -1,5 +1,6 @@
 package com.eni.amis.des.objets.controllers;
 
+import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Utilisateur;
 import com.eni.amis.des.objets.exceptions.BusinessException;
 import jakarta.validation.Valid;
@@ -16,8 +17,10 @@ public class UserController {
 
     @GetMapping("/create-profile")
     public String createProfile(Model model) {
-        Utilisateur Utilisateur = new Utilisateur();
-        model.addAttribute("utilisateur", Utilisateur);
+        Adresse adresse = new Adresse();
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setAdresse(adresse);
+        model.addAttribute("utilisateur", utilisateur);
         return "create-profile";
     }
 
