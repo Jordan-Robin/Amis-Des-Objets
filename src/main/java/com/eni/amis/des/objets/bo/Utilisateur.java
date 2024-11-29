@@ -37,6 +37,8 @@ public class Utilisateur {
 
     private Adresse adresse;
 
+    public Utilisateur() {}
+
     public Utilisateur(
             String pseudo,
             String nom,
@@ -58,6 +60,8 @@ public class Utilisateur {
         this.admin = admin;
         this.adresse = adresse;
     }
+
+
 
     public String getPseudo() {
         return pseudo;

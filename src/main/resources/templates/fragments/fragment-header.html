@@ -10,5 +10,5 @@
         <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#">Administration</a>
         <a data-th-if="${#authorization.expression('isAuthenticated()')}" href="/logout">Se déconnecter</a>
     </nav>
-    <div id="date">Date du jour : 22/04/20XX</div>
+    <div id="today-date">Date du jour : </div>
 </header>

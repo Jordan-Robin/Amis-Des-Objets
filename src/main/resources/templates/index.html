@@ -3,11 +3,13 @@
       data-th-replace="~{layouts/layout :: layout(
       title=~{:: title},
       main=~{:: main},
-      ressources=~{:: link}
+      ressources=~{:: .block-head}
       )}">
 <head>
     <title>ENI-Enchères</title>
-    <link rel="stylesheet" data-th-href="@{css/index.css}">
+    <th:block class="block-head">
+        <link rel="stylesheet" data-th-href="@{css/index.css}">
+    </th:block>
 </head>
 <body>
 
