@@ -41,7 +41,7 @@
             <input type="tel" id="telephone" data-th-field="*{telephone}">
             <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
             
-            <p data-th-text="#{view-create-profile.form.adresse}"></p>
+            <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
             <div id="adresse-fields">
                 <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
                 <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
