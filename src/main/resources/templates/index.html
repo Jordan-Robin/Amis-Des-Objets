@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head}
+      )}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENI-Enchères</title>
-    <link rel="stylesheet" th:href="@{css/index.css}">
+    <th:block class="block-head">
+        <link rel="stylesheet" data-th-href="@{css/index.css}">
+    </th:block>
 </head>
 <body>
-    <header>
-        <div id="logo">ENI-Enchères</div>
-        <nav>
-            <a href="/">Accueil</a>
-            <a href="/create-profile">S'inscrire</a>
-            <a href="/login">Se connecter</a>
-        </nav>
-        <div id="date">Date du jour : 22/04/20XX</div>
-    </header>
 
     <main>
         <section id="filters">
@@ -53,8 +49,5 @@
         </section> -->
     </main>
 
-    <footer>
-        <p>© 20XX ENI-Enchères. Tous droits réservés.</p>
-    </footer>
 </body>
 </html>

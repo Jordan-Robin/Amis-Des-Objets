@@ -1,64 +1,69 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head}
+      )}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un compte - ENI-Enchères</title>
-    <link rel="stylesheet" href="css/create-profile.css">
+    <th:block class="block-head">
+        <link rel="stylesheet" data-th-href="@{css/create-profile.css}">
+    </th:block>
 </head>
+
 <body>
-    <header>
-        <div id="logo">ENI-Enchères</div>
-        <nav>
-            <a href="/">Accueil</a>
-        </nav>
-        <div id="date">Date du jour : 22/04/202X</div>
-    </header>
-
-    <main>
-        <section id="form-section">
-            <h2>Nouveau Profil</h2>
-            <form id="create-profile-form">
-                <label for="pseudo">Pseudo (*) :</label>
-                <input type="text" id="pseudo" name="pseudo" required>
-
-                <label for="prenom">Prénom (*) :</label>
-                <input type="text" id="prenom" name="prenom" required>
-
-                <label for="nom">Nom (*) :</label>
-                <input type="text" id="nom" name="nom" required>
-
-                <label for="email">Email (*) :</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="telephone">Téléphone :</label>
-                <input type="tel" id="telephone" name="telephone">
-
-                <label for="adresse">Adresse :</label>
-                <div id="adresse-fields">
-                    <input type="text" id="rue" name="rue" placeholder="Rue">
-                    <input type="text" id="code-postal" name="code-postal" placeholder="Code Postal">
-                    <input type="text" id="ville" name="ville" placeholder="Ville">
-                </div>
-
-                <label for="mot-de-passe">Mot de passe (*) :</label>
-                <input type="password" id="mot-de-passe" name="mot-de-passe" required>
-
-                <label for="confirmation">Confirmation (*) :</label>
-                <input type="password" id="confirmation" name="confirmation" required>
-
-                <div id="buttons">
-                    <button type="submit" id="create-btn">Créer</button>
-                    <button type="reset" id="cancel-btn" onclick="window.location.href='/'">Annuler</button>
-                </div>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 20XX ENI-Enchères. Tous droits réservés.</p>
-    </footer>
-
-    <script src="js/create-profile.js"></script>
+<main>
+    <section id="form-section">
+        <h2>Nouveau Profil</h2>
+        <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+        
+        <form id="create-profile-form" data-th-action="@{/create-profile}" data-th-object="${utilisateur}" method="post">
+            <label for="pseudo">Pseudo (*) :</label>
+            <input type="text" id="pseudo" data-th-field="*{pseudo}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('pseudo')}"></div>
+            
+            <label for="prenom">Prénom (*) :</label>
+            <input type="text" id="prenom" data-th-field="*{prenom}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <label for="nom">Nom (*) :</label>
+            <input type="text" id="nom" data-th-field="*{nom}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <label for="email">Email (*) :</label>
+            <input type="email" id="email" data-th-field="*{email}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" data-th-field="*{telephone}">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <p>Adresse : (*)</p>
+            <div id="adresse-fields">
+                <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
+                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+                <input type="text" id="code-postal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
+                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+                <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
+                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            </div>
+            <!-- TODO gestion mot de passe -->
+            <label for="mot-de-passe">Mot de passe (*) :</label>
+            <input type="password" id="mot-de-passe" data-th-field="*{password}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <label for="confirmation">Confirmation (*) :</label>
+            <input type="password" id="confirmation" data-th-field="*{password}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+            
+            <div id="buttons">
+                <button type="submit" id="create-btn">Créer</button>
+                <button type="reset" id="cancel-btn" onclick="window.location.href='/'">Annuler</button>
+            </div>
+        </form>
+    </section>
+</main>
 </body>
+
 </html>

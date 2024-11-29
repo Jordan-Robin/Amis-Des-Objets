@@ -5,6 +5,7 @@ logging:
       springframework:
         jdbc:
           core: TRACE
+    sql: debug
 
 spring:
   application:
@@ -15,12 +16,12 @@ spring:
     encoding: UTF-8
   #security:
    # user:
-   #   name: user
-    #  password: password
-     # roles: USER
+     # name: user
+     # password: password
+      #roles: USER
 
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ENCHERES_DB;integratedSecurity=false;encrypt=false;trustServerCertificate=false
-    username: sa
-    password: Pa$$w0rd
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
