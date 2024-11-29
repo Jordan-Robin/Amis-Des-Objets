@@ -3,43 +3,51 @@
       data-th-replace="~{layouts/layout :: layout(
       title=~{:: title},
       main=~{:: main},
-      ressources=~{:: link}
+      ressources=~{:: .block-head}
       )}">
 <head>
     <title>ENI-Enchères</title>
-    <link rel="stylesheet" data-th-href="@{css/index.css}">
+    <th:block class="block-head">
+        <link rel="stylesheet" data-th-href="@{css/index.css}">
+    </th:block>
 </head>
 <body>
 
-<main>
-    <section id="filters">
-        <h2>Filtres</h2>
-        <form>
-            <input type="text" placeholder="Le nom de l'article contient">
-            <select>
-                <option value="toutes">Toutes</option>
-                <option value="ameublement">Ameublement</option>
-                <option value="informatique">Informatique</option>
-                <option value="sport-loisirs">Sport/Loisirs</option>
-                <option value="vetements">Vêtements</option>
-            </select>
-            <button type="submit">Rechercher</button>
-            <button type="reset">Annuler</button>
-        </form>
-    </section>
-    
-    <section id="auctions">
-        <h2>Liste des enchères</h2>
-        <div class="auction">
-            <img src="#" alt="Disque dur">
-            <h3>Disque Dur</h3>
-            <p>Prix : 1 point(s)</p>
-            <p>Fin de l'enchère : 01/06/20XX</p>
-            <p>Vendeur : coach_toto</p>
-        </div>
-        <!-- Répète cette structure pour les autres enchères -->
-    </section>
-</main>
+    <main>
+        <section id="filters">
+            <h2>Filtres</h2>
+            <form>
+                <input type="text" placeholder="Le nom de l'article contient">
+                <select>
+                    <option value="toutes">Toutes</option>
+                    <option value="ameublement">Ameublement</option>
+                    <option value="informatique">Informatique</option>
+                    <option value="sport-loisirs">Sport/Loisirs</option>
+                    <option value="vetements">Vêtements</option>
+                </select>
+                <button type="submit">Rechercher</button>
+                <button type="reset">Annuler</button>
+            </form>
+        </section>
+        
+        <section th:replace="encheresActives :: auctions"></section>
+
+<!--         <section id="auctions">
+            <h2>Liste des enchères</h2>
+            <div th:if="${#lists.isEmpty(encheres)}">
+                <p>Aucune enchère active pour le moment.</p>
+            </div>
+            <div th:each="enchere : ${encheres}">
+                <div class="auction">
+                    <img src="#" alt="Image de l'article">
+                    <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
+                    <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
+					<p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
+                    <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
+                </div>
+            </div>
+        </section> -->
+    </main>
 
 </body>
 </html>

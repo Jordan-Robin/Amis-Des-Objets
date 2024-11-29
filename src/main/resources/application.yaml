@@ -5,6 +5,7 @@ logging:
       springframework:
         jdbc:
           core: TRACE
+    sql: debug
 
 spring:
   application:

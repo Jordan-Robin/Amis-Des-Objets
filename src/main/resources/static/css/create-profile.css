@@ -1,25 +1,3 @@
-/* Style général */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #333;
-    color: white;
-    padding: 1rem;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1rem;
-}
-
 main {
     padding: 2rem;
     max-width: 800px;
@@ -78,11 +56,4 @@ button {
 #create-btn {
     background-color: #007BFF;
     color: white;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: #f8f8f8;
-    margin-top: 2rem;
 }
