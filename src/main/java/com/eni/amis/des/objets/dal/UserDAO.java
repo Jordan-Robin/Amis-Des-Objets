@@ -1,4 +1,9 @@
 package com.eni.amis.des.objets.dal;
 
-public class UserDAO {
+import com.eni.amis.des.objets.bo.Utilisateur;
+
+public interface UserDAO {
+
+    Utilisateur create(Utilisateur utilisateur);
+
 }

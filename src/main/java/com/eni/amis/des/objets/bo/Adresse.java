@@ -1,7 +1,6 @@
 package com.eni.amis.des.objets.bo;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 public class Adresse {
@@ -20,19 +19,23 @@ public class Adresse {
     @Length(max = 50, message = "La ville ne doit pas faire plus de 50 caractères.")
     private String ville;
 
+    private boolean adresseEni;
+
     public Adresse() {}
 
-    public Adresse(Long id, String rue, String codePostal, String ville) {
+    public Adresse(Long id, String rue, String codePostal, String ville, boolean adresseEni) {
         this.id = id;
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
+        this.adresseEni = adresseEni;
     }
 
-    public Adresse(String rue, String codePostal, String ville) {
+    public Adresse(String rue, String codePostal, String ville, boolean adresseEni) {
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
+        this.adresseEni = adresseEni;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class Adresse {
         this.ville = ville;
     }
 
+    public boolean isAdresseEni() {
+        return adresseEni;
+    }
+
+    public void setAdresseEni(boolean adresseEni) {
+        this.adresseEni = adresseEni;
+    }
+
     @Override
     public String toString() {
         return "Adresse{" +
@@ -74,6 +85,7 @@ public class Adresse {
                 ", rue='" + rue + '\'' +
                 ", codePostal='" + codePostal + '\'' +
                 ", ville='" + ville + '\'' +
+                ", adresseEni=" + adresseEni +
                 '}';
     }
 

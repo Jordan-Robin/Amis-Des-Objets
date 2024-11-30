@@ -1,12 +1,22 @@
 package com.eni.amis.des.objets.bll;
 
 import com.eni.amis.des.objets.bo.Utilisateur;
+import com.eni.amis.des.objets.dal.AddressDAOImpl;
+import com.eni.amis.des.objets.dal.UserDAOImpl;
 import com.eni.amis.des.objets.exceptions.BusinessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServices {
+
+    private UserDAOImpl userDAO;
+    private AddressDAOImpl addressDAO;
+
+    public UserServices(UserDAOImpl userDAO, AddressDAOImpl addressDAO) {
+        this.userDAO = userDAO;
+        this.addressDAO = addressDAO;
+    }
 
     @Transactional
     public void creerUtilisateur(Utilisateur utilisateur) {
