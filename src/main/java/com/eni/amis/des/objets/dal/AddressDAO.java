@@ -6,4 +6,6 @@ public interface AddressDAO {
 
     Adresse create(Adresse adresse);
 
+    Adresse findById(long id);
+
 }

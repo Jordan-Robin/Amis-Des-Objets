@@ -5,6 +5,7 @@ package com.eni.amis.des.objets.exceptions;
  */
 public class BusinessCode {
 
-    public static final String FRAG_HEADER_A_ACCUEIL = "frag-header.a.accueil";
+    public static final String VALIDATION_USER_PSEUDO = "validation.user.pseudo";
+    public static final String VALIDATION_USER_EMAIL = "validation.user.email";
 
 }

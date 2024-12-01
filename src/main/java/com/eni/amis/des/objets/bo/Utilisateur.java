@@ -7,6 +7,10 @@ public class Utilisateur {
 
     @NotBlank(message = "Le pseudo est obligatoire.")
     @Length(max = 30, message = "Le pseudo ne doit pas dépasser 30 caractères.")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9_]+$",
+            message = "Le pseudo n'accepte que des caractères alphanumériques ainsi que le symbole '_'."
+    )
     private String pseudo;
 
     @NotBlank(message = "Le nom est obligatoire.")
@@ -28,7 +32,10 @@ public class Utilisateur {
     private String telephone;
 
     @NotBlank(message = "Le mot de passe est obligatoire.")
-    @Length(max = 68, message = "Le mot de passe ne doit pas faire plus de 68 caractères.")
+    @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
+            message = "Le mot de passe doit comporter entre 8 et 20 caractères, au moins une majuscule, un caractère spécial et un chiffre."
+    )
     private String password;
 
     @Min(value = 0, message = "Le crédit ne peut pas être négatif.")

@@ -25,7 +25,6 @@ public class UserController {
 
     @GetMapping("/create-profile")
     public String createProfile(Model model) {
-        System.out.println("entrée get");
         Adresse adresse = new Adresse();
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setAdresse(adresse);
@@ -36,7 +35,6 @@ public class UserController {
     @PostMapping("/create-profile")
     public String createProfile(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
                                 BindingResult bindingResult) {
-        System.out.println("entrée méthode post");
         if (bindingResult.hasErrors()) {
             return "create-profile";
         } else {

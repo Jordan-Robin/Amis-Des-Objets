@@ -4,6 +4,8 @@ import com.eni.amis.des.objets.bo.Utilisateur;
 
 public interface UserDAO {
 
-    Utilisateur create(Utilisateur utilisateur);
+    void create(Utilisateur utilisateur);
+    Utilisateur findByPseudo(String pseudo);
+    Utilisateur findByEmail(String email);
 
 }
