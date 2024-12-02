@@ -35,8 +35,8 @@ public class UserController {
 
     @PostMapping("/create-profile")
     public String createProfile(
-                                @Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
                                 @RequestParam(name = "confirmation") String passwordConfirmation,
+                                @Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
                                 BindingResult bindingResult
                                ) {
         // Vérification de la correspondance des 2 mots de passe
