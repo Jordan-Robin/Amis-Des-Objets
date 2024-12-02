@@ -6,63 +6,64 @@
       ressources=~{:: .block-head}
       )}">
 <head>
-    <title>Créer un compte - ENI-Enchères</title>
+    <title data-th-text="#{view-create-profile.title}"></title>
     <th:block class="block-head">
         <link rel="stylesheet" data-th-href="@{css/create-profile.css}">
+        <script data-th-src="@{/js/create-profile.js}" defer></script>
     </th:block>
 </head>
 
 <body>
-<main>
-    <section id="form-section">
-        <h2>Nouveau Profil</h2>
+<main id="form-section">
+    <h1 data-th-text="#{view-create-profile.h1}"></h1>
+    
+    <form id="create-profile-form" data-th-action="@{/create-profile}" data-th-object="${utilisateur}"
+          method="post">
         <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
         
-        <form id="create-profile-form" data-th-action="@{/create-profile}" data-th-object="${utilisateur}" method="post">
-            <label for="pseudo">Pseudo (*) :</label>
-            <input type="text" id="pseudo" data-th-field="*{pseudo}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('pseudo')}"></div>
-            
-            <label for="prenom">Prénom (*) :</label>
-            <input type="text" id="prenom" data-th-field="*{prenom}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <label for="nom">Nom (*) :</label>
-            <input type="text" id="nom" data-th-field="*{nom}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <label for="email">Email (*) :</label>
-            <input type="email" id="email" data-th-field="*{email}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <label for="telephone">Téléphone :</label>
-            <input type="tel" id="telephone" data-th-field="*{telephone}">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <p>Adresse : (*)</p>
-            <div id="adresse-fields">
-                <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
-                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-                <input type="text" id="code-postal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
-                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-                <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
-                <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            </div>
-            <!-- TODO gestion mot de passe -->
-            <label for="mot-de-passe">Mot de passe (*) :</label>
-            <input type="password" id="mot-de-passe" data-th-field="*{password}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <label for="confirmation">Confirmation (*) :</label>
-            <input type="password" id="confirmation" data-th-field="*{password}" required>
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
-            
-            <div id="buttons">
-                <button type="submit" id="create-btn">Créer</button>
-                <button type="reset" id="cancel-btn" onclick="window.location.href='/'">Annuler</button>
-            </div>
-        </form>
-    </section>
+        <label for="pseudo" data-th-text="#{view-create-profile.form.pseudo}"></label>
+        <input type="text" id="pseudo" data-th-field="*{pseudo}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('pseudo')}"></div>
+        
+        <label for="prenom" data-th-text="#{view-create-profile.form.prenom}"></label>
+        <input type="text" id="prenom" data-th-field="*{prenom}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+        
+        <label for="nom" data-th-text="#{view-create-profile.form.nom}"></label>
+        <input type="text" id="nom" data-th-field="*{nom}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('nom')}"></div>
+        
+        <label for="email" data-th-text="#{view-create-profile.form.email}"></label>
+        <input type="email" id="email" data-th-field="*{email}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('email')}"></div>
+        
+        <label for="telephone" data-th-text="#{view-create-profile.form.telephone}"></label>
+        <input type="tel" id="telephone" data-th-field="*{telephone}">
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('telephone')}"></div>
+        
+        <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
+        <div id="adresse-fields">
+            <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
+            <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
+            <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
+        </div>
+
+        <label for="mot-de-passe" data-th-text="#{view-create-profile.form.password}"></label>
+        <input type="password" id="mot-de-passe" data-th-field="*{password}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('password')}"></div>
+        
+        <label for="confirmation" data-th-text="#{view-create-profile.form.passwordConfirmation}"></label>
+        <input type="password" id="confirmation" name="confirmation" required>
+        
+        <div id="buttons">
+            <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
+            <button type="reset" id="cancel-btn" data-th-text="#{view-create-profile.form.button.annuler}"
+                    onclick="window.location.href='/'"></button>
+        </div>
+    </form>
 </main>
 </body>
 

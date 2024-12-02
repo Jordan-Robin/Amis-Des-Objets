@@ -16,8 +16,7 @@
 <main>
     <section class="login-form">
         <h1>Connexion</h1>
-        <div data-th-if="param.error" data-th-text="Erreur"></div>
-        <div data-th-if="${param.logout}">Login logout</div>
+        <div class="error-text" data-th-if="${param.error != null}" data-th-text="#{message.loginError}"></div>
         
         <form data-th-action="@{/login}" method="post">
             <label for="username">Identifiant :</label>
@@ -30,7 +29,7 @@
             
             <div class="extra-links">
                 <a href="#">Mot de passe oublié ?</a>
-                <a href="#">Créer un compte</a>
+                <a href="/create-profile">Créer un compte</a>
             </div>
         </form>
     </section>

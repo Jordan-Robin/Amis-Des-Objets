@@ -11,43 +11,46 @@
         <link rel="stylesheet" data-th-href="@{css/index.css}">
     </th:block>
 </head>
+
 <body>
-
-    <main>
-        <section id="filters">
-            <h2>Filtres</h2>
-            <form>
-                <input type="text" placeholder="Le nom de l'article contient">
-                <select>
-                    <option value="toutes">Toutes</option>
-                    <option value="ameublement">Ameublement</option>
-                    <option value="informatique">Informatique</option>
-                    <option value="sport-loisirs">Sport/Loisirs</option>
-                    <option value="vetements">Vêtements</option>
-                </select>
-                <button type="submit">Rechercher</button>
-                <button type="reset">Annuler</button>
-            </form>
-        </section>
-        
-        <section th:replace="encheresActives :: auctions"></section>
-
-<!--         <section id="auctions">
-            <h2>Liste des enchères</h2>
-            <div th:if="${#lists.isEmpty(encheres)}">
-                <p>Aucune enchère active pour le moment.</p>
-            </div>
-            <div th:each="enchere : ${encheres}">
-                <div class="auction">
-                    <img src="#" alt="Image de l'article">
-                    <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
-                    <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
-					<p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
-                    <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
+<main>
+    
+    <div data-th-if="${param.logout}" class="error-text" data-th-text="#{message.deconnexionSuccess}"></div>
+    
+    <section id="filters">
+        <h2>Filtres</h2>
+        <form>
+            <input type="text" placeholder="Le nom de l'article contient">
+            <select>
+                <option value="toutes">Toutes</option>
+                <option value="ameublement">Ameublement</option>
+                <option value="informatique">Informatique</option>
+                <option value="sport-loisirs">Sport/Loisirs</option>
+                <option value="vetements">Vêtements</option>
+            </select>
+            <button type="submit">Rechercher</button>
+            <button type="reset">Annuler</button>
+        </form>
+    </section>
+    
+    <section th:replace="~{encheresActives :: auctions}"></section>
+    
+    <!--         <section id="auctions">
+                <h2>Liste des enchères</h2>
+                <div th:if="${#lists.isEmpty(encheres)}">
+                    <p>Aucune enchère active pour le moment.</p>
                 </div>
-            </div>
-        </section> -->
-    </main>
-
+                <div th:each="enchere : ${encheres}">
+                    <div class="auction">
+                        <img src="#" alt="Image de l'article">
+                        <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
+                        <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
+                        <p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
+                        <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
+                    </div>
+                </div>
+            </section> -->
+</main>
 </body>
+
 </html>

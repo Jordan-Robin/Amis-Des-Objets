@@ -34,25 +34,25 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> {
             auth
                     .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/create-profile").permitAll()
+                    .requestMatchers("/create-profile").permitAll()
                     .requestMatchers(HttpMethod.GET, "/article/").hasAnyRole("ADMIN")
                     .requestMatchers("/js/*").permitAll()
                     .requestMatchers("/css/*").permitAll()
                     .requestMatchers("/pictures/*").permitAll()
-                    .anyRequest().denyAll();
+                    .anyRequest().permitAll();
         });
 
-        http.formLogin(form -> {
-            form.loginPage("/login").permitAll();
-            form.defaultSuccessUrl("/");
-        });
+        http.formLogin(form -> form
+            .loginPage("/login").permitAll()
+            .defaultSuccessUrl("/")
+        );
 
         http.logout(logout -> logout
                             .invalidateHttpSession(true)
                             .clearAuthentication(true)
                             .deleteCookies("JSESSIONID")
                             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            .logoutSuccessUrl("/")
+                            .logoutSuccessUrl("/?logout=true")
                             .permitAll()
                    );
 

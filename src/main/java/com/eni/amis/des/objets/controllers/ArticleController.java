@@ -15,7 +15,7 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
-
+/*
     @GetMapping("/")
     public String afficherEncheresActives(Model model) {
         // Récupérer les enchères actives via le service
@@ -23,5 +23,5 @@ public class ArticleController {
         // Ajouter les enchères au modèle pour les afficher dans la vue
         model.addAttribute("encheres", encheresActives);
         return "index"; // Retourner la vue index.html
-    }
+    }*/
 }

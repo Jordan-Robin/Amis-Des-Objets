@@ -1,18 +1,20 @@
 <header xmlns:th="http://www.thymeleaf.org" data-th-fragment="header">
-    <div id="logo">ENI-Enchères</div>
     <div id="div-logo">
+        <a id="logo" data-th-href="@{'/'}">ENI-Enchères</a>
         <a href="/?language=fr"><img alt="Français" data-th-src="@{/pictures/French.webp}"></a>
         <a href="/?language=en"><img alt="English" data-th-src="@{/pictures/English.webp}"></a>
     </div>
-    <div>
+    <h3 data-th-if="${#authentication.principal != 'anonymousUser'}">
+        <span data-th-text="#{frag-header.welcome}"></span>
         <span data-th-text="${#authentication.name}"></span>
-    </div>
+    </h3>
     <nav>
-        <a href="/" data-th-text="#{frag-header.a.accueil}"></a>
-        <a href="/create-profile">S'inscrire</a>
-        <a href="/login">Se connecter</a>
-        <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#">Administration</a>
-        <a data-th-if="${#authorization.expression('isAuthenticated()')}" href="/logout">Se déconnecter</a>
+        <a data-th-href="@{'/create-profile'}" data-th-text="#{frag-header.a.inscription}"></a>
+        <a data-th-href="@{'/login'}" data-th-text="#{frag-header.a.connection}"></a>
+        <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#"
+           data-th-text="#{frag-header.a.administration}"></a>
+        <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{'/logout'}"
+           data-th-text="#{frag-header.a.deconnection}"></a>
     </nav>
-    <div id="today-date">Date du jour : </div>
+    <div id="today-date"></div>
 </header>
