@@ -32,7 +32,7 @@ public class UserServices {
         // Check if this email is already used.
         Utilisateur userCheckEmail = this.userDAO.findByEmail(utilisateur.getEmail());
         if (userCheckEmail != null ) {
-            be.add(BusinessCode.VALIDATION_USER_PSEUDO);
+            be.add(BusinessCode.VALIDATION_USER_EMAIL);
         }
 
         if (be.isValid()) {

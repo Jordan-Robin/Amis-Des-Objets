@@ -78,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             MapSqlParameterSource namedParameters = new MapSqlParameterSource();
             namedParameters.addValue("email", email);
-            return jdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UserRowMapper());
+            return jdbcTemplate.queryForObject(SELECT_BY_EMAIL, namedParameters, new UserRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
