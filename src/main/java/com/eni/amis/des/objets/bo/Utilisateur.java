@@ -52,7 +52,6 @@ public class Utilisateur {
             String prenom,
             String email,
             String telephone,
-            String password,
             int credit,
             boolean admin,
             Adresse adresse
@@ -62,13 +61,10 @@ public class Utilisateur {
         this.prenom = prenom;
         this.email = email;
         this.telephone = telephone;
-        this.password = password;
         this.credit = credit;
         this.admin = admin;
         this.adresse = adresse;
     }
-
-
 
     public String getPseudo() {
         return pseudo;

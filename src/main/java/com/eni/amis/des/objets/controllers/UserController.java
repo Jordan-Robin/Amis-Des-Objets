@@ -51,7 +51,7 @@ public class UserController {
         } else {
             try {
                 this.userServices.creerUtilisateur(utilisateur);
-                return "redirect:/";
+                return "redirect:/login";
             } catch (BusinessException e) {
                 e.getClefsExternalisation().forEach(key -> {
                     ObjectError error = new ObjectError("globalError", key);
@@ -60,6 +60,11 @@ public class UserController {
                 return "create-profile";
             }
         }
+    }
+
+    @GetMapping("/profile")
+    public String displayProfile() {
+        return "display-profile";
     }
 
 }

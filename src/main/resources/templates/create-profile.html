@@ -5,15 +5,13 @@
       main=~{:: main},
       ressources=~{:: .block-head}
       )}">
-<head>
-    <title data-th-text="#{view-create-profile.title}"></title>
-    <th:block class="block-head">
-        <link rel="stylesheet" data-th-href="@{css/create-profile.css}">
-        <script data-th-src="@{/js/create-profile.js}" defer></script>
-    </th:block>
-</head>
 
-<body>
+<title data-th-text="#{view-create-profile.title}"></title>
+<th:block class="block-head">
+    <link rel="stylesheet" data-th-href="@{css/create-profile.css}">
+    <script data-th-src="@{/js/create-profile.js}" defer></script>
+</th:block>
+
 <main id="form-section">
     <h1 data-th-text="#{view-create-profile.h1}"></h1>
     
@@ -65,6 +63,5 @@
         </div>
     </form>
 </main>
-</body>
 
 </html>
