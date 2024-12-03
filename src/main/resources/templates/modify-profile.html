@@ -9,11 +9,52 @@
 <title data-th-text="#{view-modify-profile.title}"></title>
 
 <th:block class="block-head">
-    <link rel="stylesheet">
+    <link rel="stylesheet" data-th-href="@{/css/modify-profile.css}">
 </th:block>
 
 <main>
     <h1 data-th-text="#{view-modify-profile.h1}"></h1>
+    
+    <form id="modify-profile-form" data-th-action="@{/profile/modify/{pseudo}(pseudo=${user.pseudo})}" data-th-object="${user}"
+          method="post">
+        <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+        
+        <label for="pseudo" data-th-text="#{view-modify-profile.form.pseudo}"></label>
+        <input type="text" id="pseudo" data-th-field="*{pseudo}" disabled>
+        
+        <label for="prenom" data-th-text="#{view-create-profile.form.prenom}"></label>
+        <input type="text" id="prenom" data-th-field="*{prenom}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+        
+        <label for="nom" data-th-text="#{view-create-profile.form.nom}"></label>
+        <input type="text" id="nom" data-th-field="*{nom}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('nom')}"></div>
+        
+        <label for="email" data-th-text="#{view-create-profile.form.email}"></label>
+        <input type="email" id="email" data-th-field="*{email}" required>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('email')}"></div>
+        
+        <label for="telephone" data-th-text="#{view-create-profile.form.telephone}"></label>
+        <input type="tel" id="telephone" data-th-field="*{telephone}">
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('telephone')}"></div>
+        
+        <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
+        <div id="adresse-fields">
+            <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
+            <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
+            <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
+        </div>
+        
+        <label for="credit" data-th-text="#{view-modify-profile.form.credit}"></label>
+        <input type="tel" id="credit" data-th-field="*{credit}" disabled>
+        
+        <div id="buttons">
+            <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
+        </div>
+    </form>
 </main>
 
 </html>

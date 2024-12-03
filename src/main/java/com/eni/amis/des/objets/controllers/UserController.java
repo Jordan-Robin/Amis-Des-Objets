@@ -6,6 +6,7 @@ import com.eni.amis.des.objets.bo.Utilisateur;
 import com.eni.amis.des.objets.exceptions.BusinessCode;
 import com.eni.amis.des.objets.exceptions.BusinessException;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,7 @@ public class UserController {
             return "create-profile";
         } else {
             try {
-                this.userServices.creerUtilisateur(utilisateur);
+                this.userServices.createUser(utilisateur);
                 return "redirect:/login";
             } catch (BusinessException e) {
                 e.getClefsExternalisation().forEach(key -> {
@@ -67,8 +68,39 @@ public class UserController {
     }
 
     @GetMapping("/profile/modify/{pseudo}")
-    public String modifyProfile(@PathVariable String pseudo) {
-        return "display-profile";
+    public String modifyProfile(@PathVariable String pseudo, Authentication authentication, Model model) {
+        // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
+        if (authentication.getName().equals(pseudo)) {
+            Utilisateur utilisateur = this.userServices.getByPseudo(pseudo);
+            model.addAttribute("user", utilisateur);
+            return "modify-profile";
+        } else {
+            return "redirect:/"; // TODO message d'erreur (user inconnu ou vous n'avez pas les droits)
+        }
+    }
+
+    @PostMapping("/profile/modify/{pseudo}")
+    public String modifyProfile(@Valid @ModelAttribute("user") Utilisateur utilisateur, BindingResult bindingResult,
+                                Authentication authentication) {
+        // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
+        if (!authentication.getName().equals(utilisateur.getPseudo())) {
+            return "redirect:/"; // TODO message d'erreur (user inconnu ou vous n'avez pas les droits)
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "modify-profile";
+        } else {
+            try {
+                this.userServices.modifyUser(utilisateur);
+                return "redirect:/profile/" + utilisateur.getPseudo();
+            } catch (BusinessException e) {
+                e.getClefsExternalisation().forEach(key -> {
+                    ObjectError error = new ObjectError("globalError", key);
+                    bindingResult.addError(error);
+                });
+                return "create-profile";
+            }
+        }
     }
 
 }

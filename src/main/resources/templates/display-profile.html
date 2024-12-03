@@ -33,12 +33,11 @@
                    data-th-text="#{view-display-profile.form.label.telephone}"></label>
             <input type="text" class="form-control w-75" id="telephone" data-th-value="${user.telephone}" disabled>
         </div>
-        
-        <a data-th-if="${true}" href="#">
+        <a data-th-if="${#authentication.name == user.pseudo}" data-th-href="@{/profile/modify/{pseudo}(pseudo=${user.pseudo})}">
             <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.modifier}">
             </button>
         </a>
-        <a data-th-if="${false}" data-th-href="@{/}">
+        <a data-th-unless="${#authentication.name == user.pseudo}" data-th-href="@{/}">
             <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.retour}"></button>
         </a>
     </div>

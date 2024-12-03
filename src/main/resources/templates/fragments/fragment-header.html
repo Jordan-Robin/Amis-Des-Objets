@@ -5,15 +5,16 @@
         <a href="/?language=en"><img alt="English" data-th-src="@{/pictures/English.webp}"></a>
     </div>
     <h3 data-th-if="${#authentication.principal != 'anonymousUser'}">
-        <span data-th-text="#{frag-header.welcome}"></span>
-        <span data-th-text="${#authentication.name}"></span>
+        <span data-th-text="#{frag-header.welcome} + ${#authentication.name}"></span>
     </h3>
     <nav>
-        <a data-th-href="@{'/create-profile'}" data-th-text="#{frag-header.a.inscription}"></a>
-        <a data-th-href="@{'/login'}" data-th-text="#{frag-header.a.connection}"></a>
+        <a data-th-if="${#authorization.expression('isAnonymous()')}" data-th-href="@{/create-profile}" data-th-text="#{frag-header.a.inscription}"></a>
+        <a data-th-if="${#authorization.expression('isAnonymous()')}" data-th-href="@{/login}" data-th-text="#{frag-header.a.connection}"></a>
+        <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{/profile/{pseudo}(pseudo=${#authentication.name})}"
+           data-th-text="#{frag-header.a.profile}"></a>
         <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#"
            data-th-text="#{frag-header.a.administration}"></a>
-        <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{'/logout'}"
+        <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{/logout}"
            data-th-text="#{frag-header.a.deconnection}"></a>
     </nav>
     <div id="today-date"></div>

@@ -23,7 +23,7 @@ public class UserServices {
     }
 
     @Transactional
-    public void creerUtilisateur(Utilisateur utilisateur) {
+    public void createUser(Utilisateur utilisateur) {
         BusinessException be = new BusinessException();
 
         // Check if this pseudo is already used
@@ -50,6 +50,11 @@ public class UserServices {
             throw be;
         }
 
+    }
+
+    @Transactional
+    public void modifyUser(Utilisateur utilisateur) {
+        System.out.println(utilisateur);
     }
 
     public Utilisateur getByPseudo(String pseudo) {
