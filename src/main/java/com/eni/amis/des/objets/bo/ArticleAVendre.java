@@ -2,6 +2,8 @@ package com.eni.amis.des.objets.bo;
 
 import java.time.LocalDate;
 
+// Tâche Page d’accueil en mode déconnecté
+
 public class ArticleAVendre {
     private int noArticle;
     public int getNoArticle() {
