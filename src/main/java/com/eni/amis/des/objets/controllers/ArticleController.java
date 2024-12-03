@@ -1,6 +1,5 @@
 package com.eni.amis.des.objets.controllers;
 
-
 import com.eni.amis.des.objets.bo.ArticleAVendre;
 import com.eni.amis.des.objets.bll.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+
+//Tâche Page d’accueil en mode déconnecté
 
 @Controller
 public class ArticleController {
