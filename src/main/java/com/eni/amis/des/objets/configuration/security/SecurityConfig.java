@@ -43,9 +43,9 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/*").permitAll()
                     .requestMatchers("/create-profile").permitAll()
                     .requestMatchers(HttpMethod.GET, "/article/").hasAnyRole("ADMIN")
-                    .requestMatchers("/js/*").permitAll()
-                    .requestMatchers("/css/*").permitAll()
-                    .requestMatchers("/pictures/*").permitAll()
+                    .requestMatchers("/js/**").permitAll()
+                    .requestMatchers("/css/**").permitAll()
+                    .requestMatchers("/pictures/**").permitAll()
                     .anyRequest().permitAll();
         });
 

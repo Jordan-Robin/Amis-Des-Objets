@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head})}"
+>
+
+<title data-th-text="#{view-modify-profile.title}"></title>
+
+<th:block class="block-head">
+    <link rel="stylesheet">
+</th:block>
+
+<main>
+    <h1 data-th-text="#{view-modify-profile.h1}"></h1>
+</main>
+
+</html>

@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -62,8 +59,15 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
-    public String displayProfile() {
+    @GetMapping("/profile/{pseudo}")
+    public String displayProfile(@PathVariable String pseudo, Model model) {
+        Utilisateur utilisateur = this.userServices.getByPseudo(pseudo);
+        model.addAttribute("user", utilisateur);
+        return "display-profile";
+    }
+
+    @GetMapping("/profile/modify/{pseudo}")
+    public String modifyProfile(@PathVariable String pseudo) {
         return "display-profile";
     }
 

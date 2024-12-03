@@ -9,35 +9,38 @@
 <title data-th-text="#{view-display-profile.title}"></title>
 
 <th:block class="block-head">
-    <link rel="stylesheet" data-th-href="@{css/create-profile.css}">
+    <link rel="stylesheet" data-th-href="@{/css/display-profile.css}">
 </th:block>
 
-<main>
+<main id="profile-card">
     <h1 data-th-text="#{view-display-profile.h1}" class="mb-4"></h1>
     
     <div class="mb-4 d-flex">
         <label for="prenom" class="form-label w-25" data-th-text="#{view-display-profile.form.label.prenom}"></label>
-        <input type="text" class="form-control w-75" id="prenom" disabled>
+        <input type="text" class="form-control w-75" id="prenom" data-th-value="${user.prenom}" disabled>
     </div>
     <div class="mb-4 d-flex">
         <label for="nom" class="form-label w-25" data-th-text="#{view-display-profile.form.label.nom}"></label>
-        <input type="text" class="form-control w-75" id="nom" disabled>
+        <input type="text" class="form-control w-75" id="nom" data-th-value="${user.nom}" disabled>
     </div>
     <div class="mb-4 d-flex">
         <label for="email" class="form-label w-25" data-th-text="#{view-display-profile.form.label.email}"></label>
-        <input type="text" class="form-control w-75" id="email" disabled>
+        <input type="text" class="form-control w-75" id="email" data-th-value="${user.email}" disabled>
     </div>
     <div class="mb-5 d-flex">
         <label for="telephone" class="form-label w-25"
                data-th-text="#{view-display-profile.form.label.telephone}"></label>
-        <input type="text" class="form-control w-75" id="telephone" disabled>
+        <input type="text" class="form-control w-75" id="telephone" data-th-value="${user.telephone}" disabled>
     </div>
     
-    <a href="#">
+    <a data-th-if="${true}" href="#">
         <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.modifier}">
-            Modifier
         </button>
     </a>
+    <a data-th-if="${false}" data-th-href="@{/}">
+        <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.retour}"></button>
+    </a>
+    
 </main>
 
 </html>
