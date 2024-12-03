@@ -41,6 +41,7 @@
         
         <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
         <div id="adresse-fields">
+            <!-- TODO fragments d'erreur sur rue, codePostal et ville marchent pas -->
             <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
             <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
             <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">

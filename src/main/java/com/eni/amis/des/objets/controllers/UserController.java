@@ -3,6 +3,7 @@ package com.eni.amis.des.objets.controllers;
 import com.eni.amis.des.objets.bll.UserServices;
 import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Utilisateur;
+import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
 import com.eni.amis.des.objets.exceptions.BusinessCode;
 import com.eni.amis.des.objets.exceptions.BusinessException;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -34,7 +36,7 @@ public class UserController {
     @PostMapping("/create-profile")
     public String createProfile(
                                 @RequestParam(name = "confirmation") String passwordConfirmation,
-                                @Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
+                                @Validated(UserValidationGroups.CreateUser.class) @ModelAttribute("utilisateur") Utilisateur utilisateur,
                                 BindingResult bindingResult
                                ) {
         // Vérification de la correspondance des 2 mots de passe
@@ -80,7 +82,8 @@ public class UserController {
     }
 
     @PostMapping("/profile/modify/{pseudo}")
-    public String modifyProfile(@Valid @ModelAttribute("user") Utilisateur utilisateur, BindingResult bindingResult,
+    public String modifyProfile(@Validated(UserValidationGroups.UpdateUser.class) @ModelAttribute("user") Utilisateur utilisateur,
+            BindingResult bindingResult,
                                 Authentication authentication) {
         // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
         if (!authentication.getName().equals(utilisateur.getPseudo())) {
