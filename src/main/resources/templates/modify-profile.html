@@ -40,6 +40,7 @@
         
         <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
         <div id="adresse-fields">
+            <input type="hidden" data-th-field="*{adresse.id}">
             <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
             <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
             <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
@@ -48,8 +49,10 @@
             <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         </div>
         
-        <label for="credit" data-th-text="#{view-modify-profile.form.credit}"></label>
-        <input type="tel" id="credit" data-th-field="*{credit}" disabled>
+        <div class="d-flex row">
+            <label class="d-flex w-25" data-th-text="#{view-modify-profile.form.credit.label}"></label>
+            <label class="w-25" data-th-text="${user.credit} + ' ' + #{view-modify-profile.form.credit.input}"></label>
+        </div>
         
         <div id="buttons">
             <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
