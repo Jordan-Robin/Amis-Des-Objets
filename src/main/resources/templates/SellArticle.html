@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: head}
+      )}">
+<head>
+    <title>Nouvelle vente</title>
+    <link rel="stylesheet" data-th-href="@{/css/sellArticle.css}">
+</head>
+<body>
+    <main th:fragment="main">
+        <h1>Nouvelle vente</h1>
+        <form method="post" th:action="@{/sell-article}">
+            <label for="article">Article (*) :</label>
+            <input type="text" id="article" name="nomArticle" required>
+            
+            <label for="categorie">Catégorie (*) :</label>
+            <select id="categorie" name="categorie" required>
+                <option th:each="categorie : ${categories}" th:value="${categorie}" th:text="${categorie}"></option>
+            </select>
+            
+            <label for="description">Description (*) :</label>
+            <textarea id="description" name="description" required></textarea>
+            
+            <label for="miseAPrix">Mise à prix (*) :</label>
+            <input type="number" id="miseAPrix" name="miseAPrix" min="1" required>
+            
+            <label for="dateDebut">Début de l'enchère (*) :</label>
+            <input type="date" id="dateDebut" name="dateDebut" required>
+            
+            <label for="dateFin">Fin de l'enchère (*) :</label>
+            <input type="date" id="dateFin" name="dateFin" required>
+            
+            <label for="retrait">Retrait (*) :</label>
+            <select id="retrait" name="adresseRetrait" required>
+                <option th:each="adresse : ${adresses}" th:value="${adresse}" th:text="${adresse}"></option>
+            </select>
+            
+            <div class="actions">
+                <button type="submit">Suivant</button>
+                <button type="button" th:onclick="|window.location='/'|">Annuler la vente</button>
+                <button type="button" th:onclick="|window.location='/'|">Annuler</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
