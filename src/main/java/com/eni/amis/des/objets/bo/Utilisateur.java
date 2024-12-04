@@ -60,10 +60,6 @@ public class Utilisateur {
             groups = {UserValidationGroups.CreateUser.class})
     private String password;
 
-    @Min(
-            value = 0,
-            message = "Le crédit ne peut pas être négatif.",
-            groups = {UserValidationGroups.CreateUser.class})
     private int credit;
     private boolean admin;
 

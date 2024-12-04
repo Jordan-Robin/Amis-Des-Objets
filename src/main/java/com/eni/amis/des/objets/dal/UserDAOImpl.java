@@ -20,6 +20,8 @@ public class UserDAOImpl implements UserDAO {
     private final String SELECT_BY_PSEUDO = "SELECT pseudo, nom, prenom, email, telephone, credit, administrateur, no_adresse FROM UTILISATEURS WHERE pseudo = :pseudo";
     private final String SELECT_BY_EMAIL = "SELECT pseudo, nom, prenom, email, telephone, credit, administrateur, " +
             "no_adresse FROM UTILISATEURS WHERE email = :email";
+    private final String UPDATE_USER = "UPDATE UTILISATEURS SET nom = :nom, prenom = :prenom, email = :email, " +
+            "telephone = :telephone WHERE pseudo = :pseudo";
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -82,6 +84,18 @@ public class UserDAOImpl implements UserDAO {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public void update(Utilisateur utilisateur) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("nom", utilisateur.getNom());
+        namedParameters.addValue("prenom", utilisateur.getPrenom());
+        namedParameters.addValue("email", utilisateur.getEmail());
+        namedParameters.addValue("telephone", utilisateur.getTelephone());
+        namedParameters.addValue("pseudo", utilisateur.getPseudo());
+
+        jdbcTemplate.update(UPDATE_USER, namedParameters);
     }
 
 }

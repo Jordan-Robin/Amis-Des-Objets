@@ -91,7 +91,7 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "modify-profile";
+            return "modify-profile"; // TODO le crédit est affiché à zéro dans le template
         } else {
             try {
                 this.userServices.modifyUser(utilisateur);
