@@ -101,7 +101,7 @@ public class UserController {
                     ObjectError error = new ObjectError("globalError", key);
                     bindingResult.addError(error);
                 });
-                return "create-profile";
+                return "modify-profile";
             }
         }
     }

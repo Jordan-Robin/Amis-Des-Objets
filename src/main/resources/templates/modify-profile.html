@@ -55,7 +55,10 @@
         </div>
         
         <div id="buttons">
-            <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
+            <button type="submit" id="modify-btn" data-th-text="#{view-modify-profile.button.modifier}"></button>
+            <a href="#"><button type="button" id="modify-password-btn" data-th-text="#{view-modify-profile.button.modifier.password}"></button></a>
+            <a href="#"><button type="button" id="delete-btn" data-th-text="#{view-modify-profile.button.supprimer}"></button></a>
+            <a data-th-href="@{/profile/{pseudo}(pseudo=${user.pseudo})}"><button type="button" id="cancel-btn" data-th-text="#{view-modify-profile.button.Annuler}"></button></a>
         </div>
     </form>
 </main>

@@ -1,6 +1,5 @@
 main {
     padding: 2rem;
-    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -15,10 +14,11 @@ h1 {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
+    width: 60%;
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }
 
 #modify-profile-form label, #address-label {
@@ -60,11 +60,21 @@ button {
     cursor: pointer;
 }
 
-#cancel-btn {
-    background-color: #ddd;
-}
-
-#create-btn {
+#modify-btn {
     background-color: #007BFF;
     color: white;
+}
+
+#modify-password-btn {
+    background-color: #e9ed09;
+    color: white;
+}
+
+#delete-btn {
+    background-color: #e80c29;
+    color: white;
+}
+
+#cancel-btn {
+    background-color: #ed8a09;
 }

@@ -29,13 +29,13 @@ public class UserServices {
 
         // Check if this pseudo is already used
         Utilisateur userCheckPseudo = userDAO.findByPseudo(utilisateur.getPseudo());
-        if (userCheckPseudo != null ) {
+        if (userCheckPseudo != null) {
             be.add(BusinessCode.VALIDATION_USER_PSEUDO);
         }
 
         // Check if this email is already used
         Utilisateur userCheckEmail = userDAO.findByEmail(utilisateur.getEmail());
-        if (userCheckEmail != null ) {
+        if (userCheckEmail != null) {
             be.add(BusinessCode.VALIDATION_USER_EMAIL);
         }
 
@@ -55,10 +55,22 @@ public class UserServices {
 
     @Transactional
     public void modifyUser(Utilisateur utilisateur) {
-        // TODO vérifier email pas déjà en base
+        System.out.println("user modifié :");
         System.out.println(utilisateur);
-        addressDAO.update(utilisateur.getAdresse());
-        userDAO.update(utilisateur);
+        // If this email is not already used by another user, update profile's datas.
+        Utilisateur userCheckEmail = userDAO.findByEmail(utilisateur.getEmail());
+        System.out.println("user checkmail :");
+        System.out.println(userCheckEmail);
+        if (userCheckEmail != null && !userCheckEmail.getPseudo().equals(utilisateur.getPseudo()) && userCheckEmail.getEmail().equals(utilisateur.getEmail())) {
+            System.out.println("user déja ce mail :");
+            System.out.println(userCheckEmail);
+            BusinessException be = new BusinessException();
+            be.add(BusinessCode.VALIDATION_USER_EMAIL);
+            throw be;
+        } else {
+            addressDAO.update(utilisateur.getAdresse());
+            userDAO.update(utilisateur);
+        }
     }
 
     public Utilisateur getByPseudo(String pseudo) {
