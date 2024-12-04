@@ -5,7 +5,9 @@
       main=~{:: main},
       ressources=~{:: .block-head}
       )}">
+<!-- Tâche - Gestion des enchères - Page d'accueil en mode déconnecté -->
 <head>
+    <!-- <meta charset="UTF-8"> -->
     <title>Liste des enchères</title>
 </head>
 
@@ -18,12 +20,26 @@
         <p>Aucune enchère active pour le moment.</p>
     </div>
     <div th:each="enchere : ${encheres}">
+    <div class="auction">
+    <!-- Lien href pour aller dans le détail de vente pour la Tâche Gestion des enchères - Afficher le détail d’une enchère -->
+        <a th:href="@{/DetailVente/{id}(id=${enchere.noArticle})}">
+            <img src="#" alt="Image de l'article">
+            <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
+        </a>
+        <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
+        <p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
+        <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
+    </div>
+    </div>
+</div>
+    
+<!--     <div th:each="enchere : ${encheres}">
         <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
         <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
         <p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
         <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
     </div>
-</div>
+</div> -->
     
 <!--     <div th:each="enchere : ${encheres}">
         <h2 th:text="${enchere.nomArticle}">Nom Article</h2>
@@ -32,7 +48,6 @@
 		<p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
         <p>Vendeur : <span th:text="${enchere.idUtilisateur}"></span></p>
     </div> -->
-</main>
+   </main>
 </body>
-
 </html>
