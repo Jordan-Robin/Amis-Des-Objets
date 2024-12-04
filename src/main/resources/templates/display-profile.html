@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head})}"
+>
+
+<title data-th-text="#{view-display-profile.title}"></title>
+
+<th:block class="block-head">
+    <link rel="stylesheet" data-th-href="@{/css/display-profile.css}">
+</th:block>
+
+<main>
+    <h1 data-th-text="#{view-display-profile.h1} + ${user.pseudo}" class="mb-4"></h1>
+    
+    <div id="profile-card">
+        <div class="mb-4 d-flex">
+            <label for="prenom" class="form-label w-25" data-th-text="#{view-display-profile.form.label.prenom}"></label>
+            <input type="text" class="form-control w-75" id="prenom" data-th-value="${user.prenom}" disabled>
+        </div>
+        <div class="mb-4 d-flex">
+            <label for="nom" class="form-label w-25" data-th-text="#{view-display-profile.form.label.nom}"></label>
+            <input type="text" class="form-control w-75" id="nom" data-th-value="${user.nom}" disabled>
+        </div>
+        <div class="mb-4 d-flex">
+            <label for="email" class="form-label w-25" data-th-text="#{view-display-profile.form.label.email}"></label>
+            <input type="text" class="form-control w-75" id="email" data-th-value="${user.email}" disabled>
+        </div>
+        <div class="mb-5 d-flex">
+            <label for="telephone" class="form-label w-25"
+                   data-th-text="#{view-display-profile.form.label.telephone}"></label>
+            <input type="text" class="form-control w-75" id="telephone" data-th-value="${user.telephone}" disabled>
+        </div>
+        <a data-th-if="${#authentication.name == user.pseudo}" data-th-href="@{/profile/modify/{pseudo}(pseudo=${user.pseudo})}">
+            <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.modifier}">
+            </button>
+        </a>
+        <a data-th-unless="${#authentication.name == user.pseudo}" data-th-href="@{/}">
+            <button type="button" class="btn btn-primary w-100" data-th-text="#{view-display-profile.button.retour}"></button>
+        </a>
+    </div>
+    
+</main>
+
+</html>

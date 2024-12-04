@@ -1,6 +1,7 @@
 package com.eni.amis.des.objets.dal;
 
 import com.eni.amis.des.objets.bo.Adresse;
+import com.eni.amis.des.objets.bo.Utilisateur;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,6 +20,8 @@ public class AddressDAOImpl implements AddressDAO {
             ":codepostal, :ville, :adresseeni)";
     private final String SELECT_BY_ID = "SELECT no_adresse, rue, code_postal, ville, adresse_eni FROM ADRESSES WHERE " +
             "no_adresse = :no_adresse";
+    private final String UPDATE_ADDRESS = "UPDATE ADRESSES SET rue = :rue, code_postal = :code_postal, ville = " +
+            ":ville WHERE no_adresse = :no_adresse";
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -65,6 +68,16 @@ public class AddressDAOImpl implements AddressDAO {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+    @Override
+    public void update(Adresse adresse) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("rue", adresse.getRue());
+        namedParameters.addValue("code_postal", adresse.getCodePostal());
+        namedParameters.addValue("ville", adresse.getVille());
+        namedParameters.addValue("no_adresse", adresse.getId());
+
+        jdbcTemplate.update(UPDATE_ADDRESS, namedParameters);
     }
 
 }
