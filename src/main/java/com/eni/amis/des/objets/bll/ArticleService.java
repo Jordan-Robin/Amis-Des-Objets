@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//Tâche Page d’accueil en mode déconnecté, Encheres Actives
+
 @Service
 public class ArticleService {
 

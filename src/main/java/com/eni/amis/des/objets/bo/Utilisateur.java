@@ -1,44 +1,65 @@
 package com.eni.amis.des.objets.bo;
 
+import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
 public class Utilisateur {
 
-    @NotBlank(message = "Le pseudo est obligatoire.")
-    @Length(max = 30, message = "Le pseudo ne doit pas dépasser 30 caractères.")
+    @NotBlank(message = "Le pseudo est obligatoire.", groups = {UserValidationGroups.CreateUser.class})
+    @Length(
+            max = 30,
+            message = "Le pseudo ne doit pas dépasser 30 caractères.",
+            groups = {UserValidationGroups.CreateUser.class})
     @Pattern(
             regexp = "^[a-zA-Z0-9_]+$",
-            message = "Le pseudo n'accepte que des caractères alphanumériques ainsi que le symbole '_'."
-    )
+            message = "Le pseudo n'accepte que des caractères alphanumériques ainsi que le symbole '_'.",
+            groups = {UserValidationGroups.CreateUser.class})
     private String pseudo;
 
-    @NotBlank(message = "Le nom est obligatoire.")
-    @Length(max = 40, message = "Le nom ne doit pas dépasser 40 caractères.")
+    @NotBlank(
+            message = "Le nom est obligatoire.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class})
+    @Length(
+            max = 40,
+            message = "Le nom ne doit pas dépasser 40 caractères.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class})
     private String nom;
 
-    @NotBlank(message = "Le prénom est obligatoire.")
-    @Length(max = 50, message = "Le prénom ne doit pas dépasser 50 caractères.")
+    @NotBlank(
+            message = "Le prénom est obligatoire.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class})
+    @Length(max = 50,
+            message = "Le prénom ne doit pas dépasser 50 caractères.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class}
+    )
     private String prenom;
 
-    @NotBlank(message = "L'email est obligatoire.")
-    @Email(message = "L'email doit être valide.")
+    @NotBlank(
+            message = "L'email est obligatoire.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class})
+    @Email(
+            message = "L'email doit être valide.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class})
     private String email;
 
     @Pattern(
             regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$",
-            message = "Le numéro de téléphone doit être valide."
+            message = "Le numéro de téléphone doit être valide.",
+            groups = {UserValidationGroups.UpdateUser.class, UserValidationGroups.CreateUser.class}
     )
     private String telephone;
 
-    @NotBlank(message = "Le mot de passe est obligatoire.")
+    @NotBlank(
+            message = "Le mot de passe est obligatoire.",
+            groups = {UserValidationGroups.CreateUser.class})
     @Pattern(
             regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
-            message = "Le mot de passe doit comporter entre 8 et 20 caractères, au moins une majuscule, un caractère spécial et un chiffre."
-    )
+            message = "Le mot de passe doit comporter entre 8 et 20 caractères, au moins une majuscule, un caractère " +
+                    "spécial et un chiffre.",
+            groups = {UserValidationGroups.CreateUser.class})
     private String password;
 
-    @Min(value = 0, message = "Le crédit ne peut pas être négatif.")
     private int credit;
     private boolean admin;
 
@@ -52,7 +73,6 @@ public class Utilisateur {
             String prenom,
             String email,
             String telephone,
-            String password,
             int credit,
             boolean admin,
             Adresse adresse
@@ -62,13 +82,10 @@ public class Utilisateur {
         this.prenom = prenom;
         this.email = email;
         this.telephone = telephone;
-        this.password = password;
         this.credit = credit;
         this.admin = admin;
         this.adresse = adresse;
     }
-
-
 
     public String getPseudo() {
         return pseudo;

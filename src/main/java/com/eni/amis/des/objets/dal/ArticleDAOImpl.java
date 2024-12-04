@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+//Tâche Page d’accueil en mode déconnecté
+
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
 
