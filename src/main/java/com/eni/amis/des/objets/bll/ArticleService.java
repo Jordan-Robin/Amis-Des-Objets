@@ -18,4 +18,14 @@ public class ArticleService {
     public List<ArticleAVendre> getEncheresActives() {
         return articleDAO.getEncheresActives();
     }
+    
+    //methode create, appel article DAO, tâche vendre un article
+    
+    public void create (ArticleAVendre article) {
+    	articleDAO.create(article);
+    }
+    
+    public void saveArticle (ArticleAVendre article) {
+    	articleDAO.create(article);
+    }
 }

@@ -1,135 +1,169 @@
 package com.eni.amis.des.objets.bo;
 
+//Tâche Article à Vendre
+
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ArticleAVendre {
+
     private Long noArticle;
-	private String nomArticle;
-	private String description;
-	private Integer photo;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
-	private Integer statutEnchere;
-	private Integer prixInitial;
-	private Integer prixVente;
-	private String idUtilisateur;
-	private Categorie categorie;
-	private Adresse adresse;
 
-	public ArticleAVendre() {}
+    @NotBlank(message = "Le nom de l'article ne peut pas être vide.")
+    @Size(max = 30, message = "Le nom de l'article ne doit pas dépasser 30 caractères.")
+    private String nomArticle;
 
-	public Long getNoArticle() {
-		return noArticle;
-	}
+    @NotBlank(message = "La description ne peut pas être vide.")
+    @Size(max = 300, message = "La description ne doit pas dépasser 300 caractères.")
+    private String description;
 
-	public void setNoArticle(Long noArticle) {
-		this.noArticle = noArticle;
-	}
+    private Integer photo;
 
-	public String getNomArticle() {
-		return nomArticle;
-	}
+    @NotNull(message = "La date de début des enchères est obligatoire.")
+    private LocalDate dateDebutEncheres;
 
-	public void setNomArticle(String nomArticle) {
-		this.nomArticle = nomArticle;
-	}
+    @NotNull(message = "La date de fin des enchères est obligatoire.")
+    private LocalDate dateFinEncheres;
 
-	public String getDescription() {
-		return description;
-	}
+    @NotNull(message = "Le statut de l'enchère est obligatoire.")
+    private Integer statutEnchere;
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @NotNull(message = "Le prix initial est obligatoire.")
+    @Min(value = 1, message = "Le prix initial doit être supérieur ou égal à 1.")
+    private Integer prixInitial;
 
-	public Integer getPhoto() {
-		return photo;
-	}
+    private Integer prixVente;
 
-	public void setPhoto(Integer photo) {
-		this.photo = photo;
-	}
+    @NotBlank(message = "L'identifiant de l'utilisateur est obligatoire.")
+    @Size(max = 30, message = "L'identifiant de l'utilisateur ne doit pas dépasser 30 caractères.")
+    private String idUtilisateur;
 
-	public LocalDate getDateDebutEncheres() {
-		return dateDebutEncheres;
-	}
+    @NotNull(message = "La catégorie est obligatoire.")
+    private Categorie categorie;
 
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
-		this.dateDebutEncheres = dateDebutEncheres;
-	}
+    @NotNull(message = "L'adresse de retrait est obligatoire.")
+    private Adresse adresse;
+    public ArticleAVendre() {}
 
-	public LocalDate getDateFinEncheres() {
-		return dateFinEncheres;
-	}
+    public Long getNoArticle() {
+        return noArticle;
+    }
 
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
-		this.dateFinEncheres = dateFinEncheres;
-	}
+    public void setNoArticle(Long noArticle) {
+        this.noArticle = noArticle;
+    }
 
-	public Integer getStatutEnchere() {
-		return statutEnchere;
-	}
+    public String getNomArticle() {
+        return nomArticle;
+    }
 
-	public void setStatutEnchere(Integer statutEnchere) {
-		this.statutEnchere = statutEnchere;
-	}
+    public void setNomArticle(String nomArticle) {
+        this.nomArticle = nomArticle;
+    }
 
-	public Integer getPrixInitial() {
-		return prixInitial;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setPrixInitial(Integer prixInitial) {
-		this.prixInitial = prixInitial;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getPrixVente() {
-		return prixVente;
-	}
+    public Integer getPhoto() {
+        return photo;
+    }
 
-	public void setPrixVente(Integer prixVente) {
-		this.prixVente = prixVente;
-	}
+    public void setPhoto(Integer photo) {
+        this.photo = photo;
+    }
 
-	public String getIdUtilisateur() {
-		return idUtilisateur;
-	}
+    public LocalDate getDateDebutEncheres() {
+        return dateDebutEncheres;
+    }
 
-	public void setIdUtilisateur(String idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
-	}
+    public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+        this.dateDebutEncheres = dateDebutEncheres;
+    }
 
-	public Categorie getCategorie() {
-		return categorie;
-	}
+    public LocalDate getDateFinEncheres() {
+        return dateFinEncheres;
+    }
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
+    public void setDateFinEncheres(LocalDate dateFinEncheres) {
+        this.dateFinEncheres = dateFinEncheres;
+    }
 
-	public Adresse getAdresse() {
-		return adresse;
-	}
+    public Integer getStatutEnchere() {
+        return statutEnchere;
+    }
 
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
+    public void setStatutEnchere(Integer statutEnchere) {
+        this.statutEnchere = statutEnchere;
+    }
 
-	@Override
-	public String toString() {
-		return "ArticleAVendre{" +
-				"noArticle=" + noArticle +
-				", nomArticle='" + nomArticle + '\'' +
-				", description='" + description + '\'' +
-				", photo=" + photo +
-				", dateDebutEncheres=" + dateDebutEncheres +
-				", dateFinEncheres=" + dateFinEncheres +
-				", statutEnchere=" + statutEnchere +
-				", prixInitial=" + prixInitial +
-				", prixVente=" + prixVente +
-				", idUtilisateur='" + idUtilisateur + '\'' +
-				", categorie=" + categorie +
-				", adresse=" + adresse +
-				'}';
-	}
+    public Integer getPrixInitial() {
+        return prixInitial;
+    }
+
+    public void setPrixInitial(Integer prixInitial) {
+        this.prixInitial = prixInitial;
+    }
+
+    public Integer getPrixVente() {
+        return prixVente;
+    }
+
+    public void setPrixVente(Integer prixVente) {
+        this.prixVente = prixVente;
+    }
+
+    public String getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(String idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.dateFinEncheres != null ? this.dateFinEncheres.format(formatter) : "Date non définie";
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleAVendre{" +
+                "noArticle=" + noArticle +
+                ", nomArticle='" + nomArticle + '\'' +
+                ", description='" + description + '\'' +
+                ", photo=" + photo +
+                ", dateDebutEncheres=" + dateDebutEncheres +
+                ", dateFinEncheres=" + dateFinEncheres +
+                ", statutEnchere=" + statutEnchere +
+                ", prixInitial=" + prixInitial +
+                ", prixVente=" + prixVente +
+                ", idUtilisateur='" + idUtilisateur + '\'' +
+                ", categorie=" + categorie +
+                ", adresse=" + adresse +
+                '}';
+    }
 
 }
+

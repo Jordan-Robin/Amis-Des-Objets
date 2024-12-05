@@ -2,8 +2,11 @@ package com.eni.amis.des.objets.dal;
 
 import com.eni.amis.des.objets.bo.ArticleAVendre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -42,4 +45,44 @@ public class ArticleDAOImpl implements ArticleDAO {
             }
         });
     }
+    
+    //Tâche Vendre un article, Insertion dans la base de données
+    
+    // Requête SQL pour insérer un article
+    private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_A_VENDRE (nom_article, description, photo, date_debut_encheres, " +
+            "date_fin_encheres, statut_enchere, prix_initial, prix_vente, id_utilisateur, no_categorie, no_adresse_retrait) " +
+            "VALUES (:nomArticle, :description, :photo, :dateDebutEncheres, :dateFinEncheres, :statutEnchere, :prixInitial, " +
+            ":prixVente, :idUtilisateur, :noCategorie, :noAdresseRetrait)";
+
+ // Requête SQL pour récupérer tous les articles
+    private static final String FIND_ALL_ARTICLES = "SELECT * FROM ARTICLES_A_VENDRE";
+    
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    
+    @Override
+    public void create(ArticleAVendre article) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("nomArticle", article.getNomArticle());
+        namedParameters.addValue("description", article.getDescription());
+        namedParameters.addValue("photo", article.getPhoto());
+        namedParameters.addValue("dateDebutEncheres", article.getDateDebutEncheres());
+        namedParameters.addValue("dateFinEncheres", article.getDateFinEncheres());
+        namedParameters.addValue("statutEnchere", article.getStatutEnchere());
+        namedParameters.addValue("prixInitial", article.getPrixInitial());
+        namedParameters.addValue("prixVente", article.getPrixVente());
+        namedParameters.addValue("idUtilisateur", article.getIdUtilisateur());
+        namedParameters.addValue("noCategorie", article.getCategorie());
+        namedParameters.addValue("noAdresseRetrait", article.getAdresse());
+
+        namedParameterJdbcTemplate.update(INSERT_ARTICLE, namedParameters);
+    }
+    
+    @Override
+    public List<ArticleAVendre> findAll() {
+        return namedParameterJdbcTemplate.query(FIND_ALL_ARTICLES, 
+            new BeanPropertyRowMapper<>(ArticleAVendre.class));
+    }
+    
+   
 }
