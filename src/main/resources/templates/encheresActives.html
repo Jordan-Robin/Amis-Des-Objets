@@ -20,7 +20,7 @@
     <div th:each="enchere : ${encheres}">
         <h3 th:text="${enchere.nomArticle}">Nom Article</h3>
         <p th:text="'Prix : ' + ${enchere.prixInitial} + ' points'">Prix</p>
-        <p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>
+        <!--<p th:text="|Fin de l'enchère : ${enchere.formattedDate}|">Fin de l'enchère</p>-->
         <p th:text="'Vendeur : ' + ${enchere.idUtilisateur}">Vendeur</p>
     </div>
 </div>

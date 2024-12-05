@@ -2,116 +2,134 @@ package com.eni.amis.des.objets.bo;
 
 import java.time.LocalDate;
 
-// Tâche Page d’accueil en mode déconnecté
-
 public class ArticleAVendre {
-    private int noArticle;
-    public int getNoArticle() {
+    private Long noArticle;
+	private String nomArticle;
+	private String description;
+	private Integer photo;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
+	private Integer statutEnchere;
+	private Integer prixInitial;
+	private Integer prixVente;
+	private String idUtilisateur;
+	private Categorie categorie;
+	private Adresse adresse;
+
+	public ArticleAVendre() {}
+
+	public Long getNoArticle() {
 		return noArticle;
+	}
+
+	public void setNoArticle(Long noArticle) {
+		this.noArticle = noArticle;
 	}
 
 	public String getNomArticle() {
 		return nomArticle;
 	}
 
+	public void setNomArticle(String nomArticle) {
+		this.nomArticle = nomArticle;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
-	public int getPhoto() {
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getPhoto() {
 		return photo;
+	}
+
+	public void setPhoto(Integer photo) {
+		this.photo = photo;
 	}
 
 	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+		this.dateDebutEncheres = dateDebutEncheres;
+	}
+
 	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public int getStatutEnchere() {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
+		this.dateFinEncheres = dateFinEncheres;
+	}
+
+	public Integer getStatutEnchere() {
 		return statutEnchere;
 	}
 
-	public int getPrixInitial() {
+	public void setStatutEnchere(Integer statutEnchere) {
+		this.statutEnchere = statutEnchere;
+	}
+
+	public Integer getPrixInitial() {
 		return prixInitial;
 	}
 
-	public int getPrixVente() {
+	public void setPrixInitial(Integer prixInitial) {
+		this.prixInitial = prixInitial;
+	}
+
+	public Integer getPrixVente() {
 		return prixVente;
+	}
+
+	public void setPrixVente(Integer prixVente) {
+		this.prixVente = prixVente;
 	}
 
 	public String getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
-	public int getNoCategorie() {
-		return noCategorie;
-	}
-
-	public int getNoAdresseRetrait() {
-		return noAdresseRetrait;
-	}
-	
-	public String getFormattedDate() {
-	    return formattedDate;
-	}
-
-	private String nomArticle;
-	private String description;
-	private int photo;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
-	private int statutEnchere; // 0, 1, 2, 3, 100
-	private int prixInitial;
-	private int prixVente;
-	private String idUtilisateur;
-	private int noCategorie;
-	private int noAdresseRetrait;
-	private String formattedDate;
-
-    // Getters et Setters
-    // toString, hashCode, equals si nécessaire
-	
-	public void setNoArticle(int noArticle) {
-	    this.noArticle = noArticle;
-	}
-
-	public void setNomArticle(String nomArticle) {
-	    this.nomArticle = nomArticle;
-	}
-
-	public void setDescription(String description) {
-	    this.description = description;
-	}
-
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
-	    this.dateDebutEncheres = dateDebutEncheres;
-	}
-
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
-	    this.dateFinEncheres = dateFinEncheres;
-	}
-
-	public void setStatutEnchere(int statutEnchere) {
-	    this.statutEnchere = statutEnchere;
-	}
-
-	public void setPrixInitial(int prixInitial) {
-	    this.prixInitial = prixInitial;
-	}
-
-	public void setPrixVente(int prixVente) {
-	    this.prixVente = prixVente;
-	}
-
 	public void setIdUtilisateur(String idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
-	
-	public void setFormattedDate(String formattedDate) {
-	    this.formattedDate = formattedDate;
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	@Override
+	public String toString() {
+		return "ArticleAVendre{" +
+				"noArticle=" + noArticle +
+				", nomArticle='" + nomArticle + '\'' +
+				", description='" + description + '\'' +
+				", photo=" + photo +
+				", dateDebutEncheres=" + dateDebutEncheres +
+				", dateFinEncheres=" + dateFinEncheres +
+				", statutEnchere=" + statutEnchere +
+				", prixInitial=" + prixInitial +
+				", prixVente=" + prixVente +
+				", idUtilisateur='" + idUtilisateur + '\'' +
+				", categorie=" + categorie +
+				", adresse=" + adresse +
+				'}';
 	}
 
 }

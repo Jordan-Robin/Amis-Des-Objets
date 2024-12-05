@@ -30,7 +30,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             @Override
             public ArticleAVendre mapRow(ResultSet rs, int rowNum) throws SQLException {
                 ArticleAVendre article = new ArticleAVendre();
-                article.setNoArticle(rs.getInt("no_article"));
+                article.setNoArticle(rs.getLong("no_article"));
                 article.setNomArticle(rs.getString("nom_article"));
                 article.setDescription(rs.getString("description"));
                 article.setPrixInitial(rs.getInt("prix_initial"));
