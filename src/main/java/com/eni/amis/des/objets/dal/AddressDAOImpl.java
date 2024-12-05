@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class AddressDAOImpl implements AddressDAO {
@@ -28,6 +29,27 @@ public class AddressDAOImpl implements AddressDAO {
     public AddressDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    
+    
+  //Tâche Vendre un Article-----------------
+    @Override
+    public List<Adresse> findAll() {
+        String sql = "SELECT no_adresse, rue, code_postal, ville, adresse_eni FROM ADRESSES";
+        return jdbcTemplate.query(sql, new RowMapper<>() {
+            @Override
+            public Adresse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Adresse adresse = new Adresse();
+                adresse.setId(rs.getLong("no_adresse"));
+                adresse.setRue(rs.getString("rue"));
+                adresse.setCodePostal(rs.getString("code_postal"));
+                adresse.setVille(rs.getString("ville"));
+                adresse.setAdresseEni(rs.getBoolean("adresse_eni"));
+                return adresse;
+            }
+        });
+    }
+  //Tâche Vendre un Article--------
+    
 
     static class AddressRowMapper implements RowMapper<Adresse> {
         @Override

@@ -13,6 +13,9 @@ public class Categorie {
 	@NotBlank(message = "Le libellé de la catégorie ne peut pas être vide.")
     @Size(max = 30, message = "Le libellé de la catégorie ne doit pas dépasser 30 caractères.")
     private String libelle;
+	
+	// Constructeur sans argument
+    public Categorie() {}
 
     public Categorie(int noCategorie, String libelle) {
         this.noCategorie = noCategorie;
