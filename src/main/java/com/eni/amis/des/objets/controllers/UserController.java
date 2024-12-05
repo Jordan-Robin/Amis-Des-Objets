@@ -1,6 +1,6 @@
 package com.eni.amis.des.objets.controllers;
 
-import com.eni.amis.des.objets.bll.UserServicesImpl;
+import com.eni.amis.des.objets.bll.UserServices;
 import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Utilisateur;
 import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
-    private final UserServicesImpl userServices;
+    private final UserServices userServices;
 
-    public UserController(UserServicesImpl userServices) {
+    public UserController(UserServices userServices) {
         this.userServices = userServices;
     }
 
@@ -82,15 +82,14 @@ public class UserController {
 
     @PostMapping("/profile/modify/{pseudo}")
     public String modifyProfile(@Validated(UserValidationGroups.UpdateUser.class) @ModelAttribute("user") Utilisateur utilisateur,
-            BindingResult bindingResult,
-                                Authentication authentication) {
-        // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
+            BindingResult bindingResult, Authentication authentication) {
+        // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même (permet également de vérifier côté serveur que l'utilisateur connecté ne tente pas de modifier son propre pseudo)
         if (!authentication.getName().equals(utilisateur.getPseudo())) {
-            return "redirect:/"; // TODO message d'erreur (user inconnu ou vous n'avez pas les droits)
+            return "redirect:/"; // TODO créer message d'erreur (user inconnu ou vous n'avez pas les droits)
         }
 
         if (bindingResult.hasErrors()) {
-            return "modify-profile"; // TODO le crédit est affiché à zéro dans le template
+            return "modify-profile";
         } else {
             try {
                 this.userServices.modifyUser(utilisateur);

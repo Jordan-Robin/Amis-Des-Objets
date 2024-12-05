@@ -59,8 +59,7 @@
         
         <div id="buttons">
             <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
-            <button type="reset" id="cancel-btn" data-th-text="#{view-create-profile.form.button.annuler}"
-                    onclick="window.location.href='/'"></button>
+            <a data-th-href="@{/}"><button type="reset" id="cancel-btn" data-th-text="#{view-create-profile.form.button.annuler}"></button></a>
         </div>
     </form>
 </main>

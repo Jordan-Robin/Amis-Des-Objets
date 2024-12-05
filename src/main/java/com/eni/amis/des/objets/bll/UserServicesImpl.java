@@ -1,7 +1,7 @@
 package com.eni.amis.des.objets.bll;
 
 import com.eni.amis.des.objets.bo.Utilisateur;
-import com.eni.amis.des.objets.dal.UserDAOImpl;
+import com.eni.amis.des.objets.dal.UserDAO;
 import com.eni.amis.des.objets.exceptions.BusinessCode;
 import com.eni.amis.des.objets.exceptions.BusinessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,12 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServicesImpl implements UserServices{
 
     // TODO catch les erreurs dans la DAL pour confirmation à l'utilisateur de la bonne exécution du insert ou update
-    private final UserDAOImpl userDAO;
+    private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
-    private final AdresseServiceImpl adresseService;
+    private final AdresseService adresseService;
 
-    public UserServicesImpl(UserDAOImpl userDAO, PasswordEncoder passwordEncoder,
-                            AdresseServiceImpl adresseService) {
+    public UserServicesImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, AdresseService adresseService) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
         this.adresseService = adresseService;

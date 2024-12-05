@@ -3,9 +3,15 @@ package com.eni.amis.des.objets.bo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.io.Serial;
+import java.io.Serializable;
 //Tâche Vendre un Article
 
-public class Categorie {
+public class Categorie implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "Le numéro de catégorie est obligatoire.")
     private int noCategorie;

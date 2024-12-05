@@ -1,15 +1,15 @@
 package com.eni.amis.des.objets.bll;
 
 import com.eni.amis.des.objets.bo.Adresse;
-import com.eni.amis.des.objets.dal.AddressDAOImpl;
+import com.eni.amis.des.objets.dal.AddressDAO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdresseServiceImpl implements AdresseService {
 
-    private final AddressDAOImpl addressDAO;
+    private final AddressDAO addressDAO;
 
-    public AdresseServiceImpl(AddressDAOImpl addressDAO) {
+    public AdresseServiceImpl(AddressDAO addressDAO) {
         this.addressDAO = addressDAO;
     }
 
