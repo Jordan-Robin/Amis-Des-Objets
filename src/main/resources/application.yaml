@@ -14,14 +14,9 @@ spring:
     active: dev
   messages:
     encoding: UTF-8
-  #security:
-   # user:
-     # name: user
-     # password: password
-      #roles: USER
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:sqlserver://localhost:1433;databasename=ENCHERES_DB;integratedSecurity=false;encrypt=false;trustServerCertificate=false
+    username: sa
+    password: Pa$$w0rd
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

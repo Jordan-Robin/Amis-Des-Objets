@@ -42,7 +42,7 @@ public class UserServicesImpl implements UserServices{
             // Password hashing
             String hashedPassword = this.passwordEncoder.encode(utilisateur.getPassword());
             utilisateur.setPassword(hashedPassword);
-            // Persist the address and user in database
+
             adresseService.create(utilisateur.getAdresse());
             utilisateur.setCredit(10);
             userDAO.create(utilisateur);
@@ -54,15 +54,9 @@ public class UserServicesImpl implements UserServices{
 
     @Transactional
     public void modifyUser(Utilisateur utilisateur) {
-        System.out.println("user modifié :");
-        System.out.println(utilisateur);
         // If this email is not already used by another user, update profile's datas.
         Utilisateur userCheckEmail = userDAO.findByEmail(utilisateur.getEmail());
-        System.out.println("user checkmail :");
-        System.out.println(userCheckEmail);
         if (userCheckEmail != null && !userCheckEmail.getPseudo().equals(utilisateur.getPseudo()) && userCheckEmail.getEmail().equals(utilisateur.getEmail())) {
-            System.out.println("user déja ce mail :");
-            System.out.println(userCheckEmail);
             BusinessException be = new BusinessException();
             be.add(BusinessCode.VALIDATION_USER_EMAIL);
             throw be;

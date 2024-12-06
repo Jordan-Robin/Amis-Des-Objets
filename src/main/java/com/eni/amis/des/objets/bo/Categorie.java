@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serial;
 import java.io.Serializable;
-//Tâche Vendre un Article
 
 public class Categorie implements Serializable {
 
@@ -19,6 +18,8 @@ public class Categorie implements Serializable {
 	@NotBlank(message = "Le libellé de la catégorie ne peut pas être vide.")
     @Size(max = 30, message = "Le libellé de la catégorie ne doit pas dépasser 30 caractères.")
     private String libelle;
+
+    public Categorie() {}
 
     public Categorie(int noCategorie, String libelle) {
         this.noCategorie = noCategorie;

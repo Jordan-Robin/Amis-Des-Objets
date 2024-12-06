@@ -3,28 +3,33 @@ package com.eni.amis.des.objets.controllers;
 import com.eni.amis.des.objets.bo.ArticleAVendre;
 import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Categorie;
-import com.eni.amis.des.objets.dal.AddressDAO;
 import com.eni.amis.des.objets.dal.CategorieDAO;
+import com.eni.amis.des.objets.bll.AdresseService;
 import com.eni.amis.des.objets.bll.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class ArticleController {
 
-    @Autowired
-    private ArticleService articleService;
-    
-    @Autowired
-    private AddressDAO addressDAO;
+//    @Autowired
+//    private ArticleService articleService;
+	
+    private final ArticleService articleService;
+    private final AdresseService adresseService;
 
+    public ArticleController(ArticleService articleService, AdresseService addressService) {
+        this.articleService = articleService;
+        this.adresseService = addressService;
+    }
+    
     @Autowired
     private CategorieDAO categorieDAO;
 
@@ -40,26 +45,12 @@ public class ArticleController {
     
   //Tâche Vendre un article
     
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    
-    private List<Adresse> recupererToutesLesAdressesDirectement() {
-        String sql = "SELECT no_adresse, rue, code_postal, ville, adresse_eni FROM ADRESSES";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Adresse adresse = new Adresse();
-            adresse.setId(rs.getLong("no_adresse"));
-            adresse.setRue(rs.getString("rue"));
-            adresse.setCodePostal(rs.getString("code_postal"));
-            adresse.setVille(rs.getString("ville"));
-            adresse.setAdresseEni(rs.getBoolean("adresse_eni"));
-            return adresse;
-        });
-    }
-    
     @GetMapping("/sell-article")
     public String afficherFormulaireVente(Model model) {
         List<Categorie> categories = categorieDAO.getAllCategories();
-        List<Adresse> adresses = recupererToutesLesAdressesDirectement();
+        List<Adresse> adresses = adresseService.getAllAddresses(); // Méthode correcte
+        //List<String> adresses = adresseService.getAllAddresses(); // Utilisation de AddressService
+       // List<Adresse> adresses = recupererToutesLesAdressesDirectement();
 
         model.addAttribute("categories", categories);
         model.addAttribute("adresses", adresses);
@@ -72,10 +63,15 @@ public class ArticleController {
     }
     
     @PostMapping("/sell-article")
-    public String traiterFormulaireVente(@ModelAttribute("sellArticle") ArticleAVendre article, Model model) {
-        try {
+    public String traiterFormulaireVente(@ModelAttribute("sellArticle") ArticleAVendre article, Model model, Principal principal) {
+        if (article.getCategorie() == null || article.getCategorie().getNoCategorie() == 0) {
+            model.addAttribute("error", "Veuillez sélectionner une catégorie valide.");
+            return "sellArticle";
+        }
+    	try {
+        	
             // Exemple : sauvegarder l'article via ArticleService (vous devrez le créer)
-            articleService.saveArticle(article);
+            articleService.saveArticle(article, principal.getName());
 
             // Ajouter un message de succès dans le modèle
             model.addAttribute("message", "Article mis en vente avec succès !");

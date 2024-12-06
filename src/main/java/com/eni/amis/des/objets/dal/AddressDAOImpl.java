@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class AddressDAOImpl implements AddressDAO {
@@ -22,6 +23,7 @@ public class AddressDAOImpl implements AddressDAO {
             "no_adresse = :no_adresse";
     private final String UPDATE_ADDRESS = "UPDATE ADRESSES SET rue = :rue, code_postal = :code_postal, ville = " +
             ":ville WHERE no_adresse = :no_adresse";
+    private final String FIND_ALL = "SELECT no_adresse, rue, code_postal, ville, adresse_eni FROM ADRESSES";
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -60,6 +62,15 @@ public class AddressDAOImpl implements AddressDAO {
     }
 
     @Override
+    public List<Adresse> findAll() {
+        try {
+            return jdbcTemplate.query(FIND_ALL, new AddressRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
     public Adresse findById(long id) {
         try {
             MapSqlParameterSource namedParameters = new MapSqlParameterSource();
@@ -69,6 +80,7 @@ public class AddressDAOImpl implements AddressDAO {
             return null;
         }
     }
+
     @Override
     public void update(Adresse adresse) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();

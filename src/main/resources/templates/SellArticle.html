@@ -22,12 +22,20 @@
 <!--                 <option th:each="categorie : ${categories}" th:value="${categorie}" th:text="${categorie}"></option> -->
 <!--             </select> -->
 
-    <label for="categorie">Catégorie</label>
-    <select id="categorie" name="sellArticle.categorie">
-        <option th:each="categorie : ${categories}" 
-                th:value="${categorie.noCategorie}" 
-                th:text="${categorie.libelle}"></option>
-    </select>
+<!--     <label for="categorie">Catégorie</label> -->
+<label for="categorie" data-th-text="#{view-sell-article.form.categorie}"></label>
+<!--     <select id="categorie" name="sellArticle.categorie"> -->
+<!--         <option th:each="categorie : ${categories}"  -->
+<!--                 th:value="${categorie.noCategorie}"  -->
+<!--                 th:text="${categorie.libelle}"></option> -->
+<!--     </select> -->
+
+<select id="categorie" name="categorie.noCategorie" th:field="*{categorie.noCategorie}">
+    <option th:each="categorie : ${categories}" 
+            th:value="${categorie.noCategorie}" 
+            th:text="${categorie.libelle}"></option>
+</select>
+
 
             <label for="description" data-th-text="#{view-sell-article.form.description}"></label>
             <textarea id="description" name="description" data-th-field="*{description}" required></textarea>
@@ -50,12 +58,21 @@
 <!--                 <option th:each="adresse : ${adresses}" th:value="${adresse}" th:text="${adresse}"></option> -->
 <!--             </select> -->
 
-    <label for="adresse">Adresse</label>
-    <select id="adresse" name="sellArticle.adresse">
-        <option th:each="adresse : ${adresses}" 
-                th:value="${adresse.id}" 
-                th:text="${adresse.rue + ' ' + adresse.ville}"></option>
-    </select>
+<!--     <label for="adresse">Adresse</label> -->
+ <label for="retrait" data-th-text="#{view-sell-article.form.retrait}"></label>
+<!--     <select id="adresse" name="sellArticle.adresse"> -->
+<!--         <option th:each="adresse : ${adresses}"  -->
+<!--                 th:value="${adresse.id}"  -->
+<!--                 th:text="${adresse.rue + ' ' + adresse.ville}"></option> -->
+<!--     </select> -->
+
+<!-- <select id="adresse" name="sellArticle.adresse.id" th:field="*{adresse.id}"> -->
+<select id="adresse" name="adresse.id" th:field="*{adresse.id}">
+    <option th:each="adresse : ${adresses}" 
+            th:value="${adresse.id}" 
+            th:text="${adresse.rue + ' ' + adresse.ville}"></option>
+</select>
+
            
 
             <div class="actions">
