@@ -6,13 +6,14 @@ import com.eni.amis.des.objets.bo.Utilisateur;
 import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
 import com.eni.amis.des.objets.exceptions.BusinessCode;
 import com.eni.amis.des.objets.exceptions.BusinessException;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -69,9 +70,9 @@ public class UserController {
     }
 
     @GetMapping("/profile/modify/{pseudo}")
-    public String modifyProfile(@PathVariable String pseudo, Authentication authentication, Model model) {
+    public String modifyProfile(@PathVariable String pseudo, Principal principal, Model model) {
         // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
-        if (authentication.getName().equals(pseudo)) {
+        if (principal.getName().equals(pseudo)) {
             Utilisateur utilisateur = this.userServices.getByPseudo(pseudo);
             model.addAttribute("user", utilisateur);
             return "modify-profile";
@@ -82,9 +83,9 @@ public class UserController {
 
     @PostMapping("/profile/modify/{pseudo}")
     public String modifyProfile(@Validated(UserValidationGroups.UpdateUser.class) @ModelAttribute("user") Utilisateur utilisateur,
-            BindingResult bindingResult, Authentication authentication) {
+            BindingResult bindingResult, Principal principal) {
         // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même (permet également de vérifier côté serveur que l'utilisateur connecté ne tente pas de modifier son propre pseudo)
-        if (!authentication.getName().equals(utilisateur.getPseudo())) {
+        if (!principal.getName().equals(utilisateur.getPseudo())) {
             return "redirect:/"; // TODO créer message d'erreur (user inconnu ou vous n'avez pas les droits)
         }
 

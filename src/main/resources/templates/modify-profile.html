@@ -42,12 +42,12 @@
         <div id="adresse-fields">
             <input type="hidden" data-th-field="*{adresse.id}">
             <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
             <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
             <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         </div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         
         <div class="d-flex row">
             <input type="hidden" data-th-field="*{credit}">
