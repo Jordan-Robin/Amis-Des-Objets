@@ -15,7 +15,8 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-//Tâche Page d’accueil en mode déconnecté
+//Tâche Page d’accueil en mode déconnecté, Enchères Active
+// Tâche Vendre un Article
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
@@ -25,12 +26,16 @@ public class ArticleDAOImpl implements ArticleDAO {
     public ArticleDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    
+    //Tâche Encheres Actives
 
     @Override
     public List<ArticleAVendre> getEncheresActives() {
         String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE statut_enchere = 1";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleAVendre.class));
     }
+    
+    //-----------
 
     @Override
     public void create(ArticleAVendre article) {

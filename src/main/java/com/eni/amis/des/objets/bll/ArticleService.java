@@ -23,12 +23,18 @@ public class ArticleService {
         this.categorieDAO = categorieDAO;
         this.userDAO = userDAO;
     }
+     
+     //--------Tâche Encheres Actives ----------
 
     public List<ArticleAVendre> getEncheresActives() {
         return articleDAO.getEncheresActives();
     }
     
-    //methode create, appel article DAO, tâche vendre un article
+    //-------Tâches Encheres Actives ----------
+    
+    
+    
+    //methode create, appel article DAO, Tâche vendre un article
     
     public void create (ArticleAVendre article) {
     	articleDAO.create(article);
