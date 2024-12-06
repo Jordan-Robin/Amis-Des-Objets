@@ -63,14 +63,14 @@ public class UserController {
     }
 
     @GetMapping("/profile/{pseudo}")
-    public String displayProfile(@PathVariable String pseudo, Model model) {
+    public String displayProfile(@PathVariable(name = "pseudo") String pseudo, Model model) {
         Utilisateur utilisateur = this.userServices.getByPseudo(pseudo);
         model.addAttribute("user", utilisateur);
         return "display-profile";
     }
 
     @GetMapping("/profile/modify/{pseudo}")
-    public String modifyProfile(@PathVariable String pseudo, Principal principal, Model model) {
+    public String modifyProfile(@PathVariable(name = "pseudo") String pseudo, Principal principal, Model model) {
         // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même
         if (principal.getName().equals(pseudo)) {
             Utilisateur utilisateur = this.userServices.getByPseudo(pseudo);
