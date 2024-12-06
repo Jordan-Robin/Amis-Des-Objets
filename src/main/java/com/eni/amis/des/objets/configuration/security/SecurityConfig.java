@@ -2,7 +2,6 @@ package com.eni.amis.des.objets.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -41,9 +40,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> {
             auth
                     .requestMatchers("/", "/create-profile").permitAll()
-                    .requestMatchers("/profile/**").authenticated()
+                    .requestMatchers("/profile/**", "/sell-article/**", "/DetailVente/**").authenticated()
                     .requestMatchers("/js/**", "/css/**", "/pictures/**").permitAll()
-                    .anyRequest().permitAll();
+                    .anyRequest().denyAll();
         });
 
         http.formLogin(form -> form

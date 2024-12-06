@@ -20,7 +20,7 @@
         <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
         
         <label for="pseudo" data-th-text="#{view-modify-profile.form.pseudo}"></label>
-        <input type="text" id="pseudo" data-th-field="*{pseudo}" disabled>
+        <input type="text" id="pseudo" data-th-field="*{pseudo}" readonly>
         
         <label for="prenom" data-th-text="#{view-create-profile.form.prenom}"></label>
         <input type="text" id="prenom" data-th-field="*{prenom}" required>
@@ -42,14 +42,15 @@
         <div id="adresse-fields">
             <input type="hidden" data-th-field="*{adresse.id}">
             <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
             <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
             <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         </div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         
         <div class="d-flex row">
+            <input type="hidden" data-th-field="*{credit}">
             <label class="d-flex w-25" data-th-text="#{view-modify-profile.form.credit.label}"></label>
             <label class="w-25" data-th-text="${user.credit} + ' ' + #{view-modify-profile.form.credit.input}"></label>
         </div>

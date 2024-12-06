@@ -8,5 +8,12 @@ import java.util.List;
 public interface ArticleDAO {
     // Méthode pour récupérer les enchères actives
     List<ArticleAVendre> getEncheresActives();
+    
+    //--------------
+    
+    // Tâche Vendre un article
+	void create(ArticleAVendre article);
+
+	List<ArticleAVendre> findAll();
 }
 

@@ -14,11 +14,6 @@ spring:
     active: dev
   messages:
     encoding: UTF-8
-  #security:
-   # user:
-     # name: user
-     # password: password
-      #roles: USER
 
   datasource:
     url: ${DB_URL}
