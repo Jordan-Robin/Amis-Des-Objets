@@ -18,9 +18,6 @@ import java.util.List;
 
 @Controller
 public class ArticleController {
-
-//    @Autowired
-//    private ArticleService articleService;
 	
     private final ArticleService articleService;
     private final AdresseService adresseService;
@@ -48,8 +45,8 @@ public class ArticleController {
     @GetMapping("/sell-article")
     public String afficherFormulaireVente(Model model) {
         List<Categorie> categories = categorieDAO.getAllCategories();
-        List<Adresse> adresses = adresseService.getAllAddresses(); // Méthode correcte
-        //List<String> adresses = adresseService.getAllAddresses(); // Utilisation de AddressService
+        List<Adresse> adresses = adresseService.getAllAddresses(); 
+        //List<String> adresses = adresseService.getAllAddresses();
        // List<Adresse> adresses = recupererToutesLesAdressesDirectement();
 
         model.addAttribute("categories", categories);
@@ -70,7 +67,7 @@ public class ArticleController {
         }
     	try {
         	
-            // Exemple : sauvegarder l'article via ArticleService (vous devrez le créer)
+            //Sauvegarder l'article via ArticleService
             articleService.saveArticle(article, principal.getName());
 
             // Ajouter un message de succès dans le modèle
