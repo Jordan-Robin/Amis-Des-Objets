@@ -14,6 +14,12 @@ import java.sql.SQLException;
 @Repository
 public class UserDAOImpl implements UserDAO {
 
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public UserDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     private final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, " +
             "mot_de_passe, credit, administrateur, no_adresse) VALUES (:pseudo, :nom, :prenom, :email, :telephone, " +
             ":password, :credit, :administrateur, :noAdresse)";
@@ -22,12 +28,6 @@ public class UserDAOImpl implements UserDAO {
             "no_adresse FROM UTILISATEURS WHERE email = :email";
     private final String UPDATE_USER = "UPDATE UTILISATEURS SET nom = :nom, prenom = :prenom, email = :email, " +
             "telephone = :telephone WHERE pseudo = :pseudo";
-
-    private final NamedParameterJdbcTemplate jdbcTemplate;
-
-    public UserDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     static class UserRowMapper implements RowMapper<Utilisateur> {
         @Override
@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
             utilisateur.setAdmin(rs.getBoolean("administrateur"));
 
             Adresse adresse = new Adresse();
-            adresse.setId(rs.getLong("no_adresse"));
+            adresse.setId(rs.getInt("no_adresse"));
             utilisateur.setAdresse(adresse);
             return utilisateur;
         }

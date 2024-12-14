@@ -1,17 +1,14 @@
 package com.eni.amis.des.objets.bo;
 
-//Tâche Article à Vendre
-
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
 public class ArticleAVendre {
 
-    private Long noArticle;
+    private Integer noArticle;
 
     @NotBlank(message = "Le nom de l'article ne peut pas être vide.")
     @Size(max = 30, message = "Le nom de l'article ne doit pas dépasser 30 caractères.")
@@ -51,11 +48,11 @@ public class ArticleAVendre {
     	this.utilisateur = new Utilisateur();
     }
 
-    public Long getNoArticle() {
+    public Integer getNoArticle() {
         return noArticle;
     }
 
-    public void setNoArticle(Long noArticle) {
+    public void setNoArticle(Integer noArticle) {
         this.noArticle = noArticle;
     }
 
@@ -170,7 +167,7 @@ public class ArticleAVendre {
     public enum StatutEnchere {
         PAS_COMMENCEE(0), EN_COURS(1), CLOTUREE(2), LIVREE(3), ANNULEE(100);
 
-        private final int code;
+        private final Integer code;
 
         StatutEnchere(int code) {
             this.code = code;
@@ -197,42 +194,6 @@ public class ArticleAVendre {
         }
         return true; // Laisse Jakarta Validation gérer les champs null
     }
-    
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ArticleAVendre that = (ArticleAVendre) o;
-        return Objects.equals(noArticle, that.noArticle) &&
-               Objects.equals(nomArticle, that.nomArticle) &&
-               Objects.equals(utilisateur, that.utilisateur);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(noArticle, nomArticle, utilisateur);
-    }
-
-    public ArticleAVendre(Long noArticle, String nomArticle, String description, Integer photo, 
-            LocalDate dateDebutEncheres, LocalDate dateFinEncheres, 
-            StatutEnchere statutEnchere, Integer prixInitial, Integer prixVente, 
-            Utilisateur utilisateur, Categorie categorie, Adresse adresse) {
-this.noArticle = noArticle;
-this.nomArticle = nomArticle;
-this.description = description;
-this.photo = photo;
-this.dateDebutEncheres = dateDebutEncheres;
-this.dateFinEncheres = dateFinEncheres;
-this.statutEnchere = statutEnchere;
-this.prixInitial = prixInitial;
-this.prixVente = prixVente;
-this.utilisateur = utilisateur;
-this.categorie = categorie;
-this.adresse = adresse;
-}
-    
-    //---------------
 
     @Override
     public String toString() {

@@ -3,7 +3,7 @@ package com.eni.amis.des.objets.controllers;
 import com.eni.amis.des.objets.bo.ArticleAVendre;
 import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Categorie;
-import com.eni.amis.des.objets.dal.CategorieDAO;
+import com.eni.amis.des.objets.dal.CategorieDAOImpl;
 import com.eni.amis.des.objets.bll.AdresseService;
 import com.eni.amis.des.objets.bll.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ArticleController {
     }
     
     @Autowired
-    private CategorieDAO categorieDAO;
+    private CategorieDAOImpl categorieDAOImpl;
 
   //Tâche Page d’accueil en mode déconnecté
     @GetMapping("/")
@@ -44,7 +44,7 @@ public class ArticleController {
     
     @GetMapping("/sell-article")
     public String afficherFormulaireVente(Model model) {
-        List<Categorie> categories = categorieDAO.getAllCategories();
+        List<Categorie> categories = categorieDAOImpl.getAllCategories();
         List<Adresse> adresses = adresseService.getAllAddresses(); 
         //List<String> adresses = adresseService.getAllAddresses();
        // List<Adresse> adresses = recupererToutesLesAdressesDirectement();

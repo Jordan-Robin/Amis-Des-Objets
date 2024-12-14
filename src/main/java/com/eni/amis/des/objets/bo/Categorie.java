@@ -13,7 +13,7 @@ public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "Le numéro de catégorie est obligatoire.")
-    private int noCategorie;
+    private Integer noCategorie;
 
 	@NotBlank(message = "Le libellé de la catégorie ne peut pas être vide.")
     @Size(max = 30, message = "Le libellé de la catégorie ne doit pas dépasser 30 caractères.")
@@ -21,16 +21,16 @@ public class Categorie implements Serializable {
 
     public Categorie() {}
 
-    public Categorie(int noCategorie, String libelle) {
+    public Categorie(Integer noCategorie, String libelle) {
         this.noCategorie = noCategorie;
         this.libelle = libelle;
     }
 
-    public int getNoCategorie() {
+    public Integer getNoCategorie() {
         return noCategorie;
     }
 
-    public void setNoCategorie(int noCategorie) {
+    public void setNoCategorie(Integer noCategorie) {
         this.noCategorie = noCategorie;
     }
 
@@ -48,4 +48,5 @@ public class Categorie implements Serializable {
                 "noCategorie=" + noCategorie +
                 ", libelle='" + libelle + ')';
     }
+
 }

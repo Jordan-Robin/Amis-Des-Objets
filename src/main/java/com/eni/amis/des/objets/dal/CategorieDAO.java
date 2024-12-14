@@ -1,25 +1,11 @@
 package com.eni.amis.des.objets.dal;
 
-//-----Tâche Vendre un Article
+import com.eni.amis.des.objets.bo.Categorie;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+public interface CategorieDAO {
 
-import com.eni.amis.des.objets.bo.Categorie;
+    List<Categorie> findAll();
 
-@Repository
-public class CategorieDAO {
-
-  @Autowired
-  private JdbcTemplate jdbcTemplate;
-
-  public List<Categorie> getAllCategories() {
-      String sql = "SELECT no_categorie, libelle FROM CATEGORIES";
-      return jdbcTemplate.query(sql, (rs, rowNum) -> 
-          new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"))
-      );
-  }
 }

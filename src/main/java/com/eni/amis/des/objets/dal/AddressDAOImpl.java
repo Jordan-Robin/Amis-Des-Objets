@@ -35,7 +35,7 @@ public class AddressDAOImpl implements AddressDAO {
         @Override
         public Adresse mapRow(ResultSet rs, int rowNum) throws SQLException {
             Adresse adresse = new Adresse();
-            adresse.setId(rs.getLong("no_adresse"));
+            adresse.setId(rs.getInt("no_adresse"));
             adresse.setRue(rs.getString("rue"));
             adresse.setCodePostal(rs.getString("code_postal"));
             adresse.setVille(rs.getString("ville"));
@@ -56,7 +56,7 @@ public class AddressDAOImpl implements AddressDAO {
 
         this.jdbcTemplate.update(INSERT_ADDRESS, namedParameters, keyHolder);
         if (keyHolder != null && keyHolder.getKey() != null) {
-            adresse.setId(keyHolder.getKey().longValue());
+            adresse.setId(keyHolder.getKey().intValue());
         }
         return adresse;
     }
