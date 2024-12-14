@@ -41,14 +41,13 @@
         
         <p id="address-label" data-th-text="#{view-create-profile.form.adresse}"></p>
         <div id="adresse-fields">
-            <!-- TODO fragments d'erreur sur rue, codePostal et ville marchent pas -->
             <input type="text" id="rue" data-th-field="*{adresse.rue}" placeholder="Rue">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
             <input type="text" id="codePostal" data-th-field="*{adresse.codePostal}" placeholder="Code Postal">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
             <input type="text" id="ville" data-th-field="*{adresse.ville}" placeholder="Ville">
-            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
         </div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.rue')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.codePostal')}"></div>
+        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('adresse.ville')}"></div>
 
         <label for="mot-de-passe" data-th-text="#{view-create-profile.form.password}"></label>
         <input type="password" id="mot-de-passe" data-th-field="*{password}" required>
@@ -59,8 +58,7 @@
         
         <div id="buttons">
             <button type="submit" id="create-btn" data-th-text="#{view-create-profile.form.button.creer}"></button>
-            <button type="reset" id="cancel-btn" data-th-text="#{view-create-profile.form.button.annuler}"
-                    onclick="window.location.href='/'"></button>
+            <a data-th-href="@{/}"><button type="reset" id="cancel-btn" data-th-text="#{view-create-profile.form.button.annuler}"></button></a>
         </div>
     </form>
 </main>

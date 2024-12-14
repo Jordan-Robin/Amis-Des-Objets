@@ -1,8 +1,11 @@
 package com.eni.amis.des.objets.bo;
 
 import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
 
 public class Utilisateur {
 
@@ -63,6 +66,7 @@ public class Utilisateur {
     private int credit;
     private boolean admin;
 
+    @Valid
     private Adresse adresse;
 
     public Utilisateur() {}

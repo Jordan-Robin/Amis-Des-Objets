@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 public class Adresse {
 
-    private Long id;
+    private Integer id;
 
     @NotBlank(
             message = "La rue doit être renseignée.",
@@ -42,7 +42,7 @@ public class Adresse {
 
     public Adresse() {}
 
-    public Adresse(Long id, String rue, String codePostal, String ville, boolean adresseEni) {
+    public Adresse(Integer id, String rue, String codePostal, String ville, boolean adresseEni) {
         this.id = id;
         this.rue = rue;
         this.codePostal = codePostal;
@@ -57,11 +57,11 @@ public class Adresse {
         this.adresseEni = adresseEni;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

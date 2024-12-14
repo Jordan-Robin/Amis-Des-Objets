@@ -1,117 +1,217 @@
 package com.eni.amis.des.objets.bo;
 
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
-
-// Tâche Page d’accueil en mode déconnecté
+import java.time.format.DateTimeFormatter;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 
 public class ArticleAVendre {
-    private int noArticle;
-    public int getNoArticle() {
-		return noArticle;
-	}
 
-	public String getNomArticle() {
-		return nomArticle;
-	}
+    private Integer noArticle;
 
-	public String getDescription() {
-		return description;
-	}
+    @NotBlank(message = "Le nom de l'article ne peut pas être vide.")
+    @Size(max = 30, message = "Le nom de l'article ne doit pas dépasser 30 caractères.")
+    private String nomArticle;
 
-	public int getPhoto() {
-		return photo;
-	}
+    @NotBlank(message = "La description ne peut pas être vide.")
+    @Size(max = 300, message = "La description ne doit pas dépasser 300 caractères.")
+    private String description;
 
-	public LocalDate getDateDebutEncheres() {
-		return dateDebutEncheres;
-	}
+    private Integer photo;
 
-	public LocalDate getDateFinEncheres() {
-		return dateFinEncheres;
-	}
+    @NotNull(message = "La date de début des enchères est obligatoire.")
+    private LocalDate dateDebutEncheres;
 
-	public int getStatutEnchere() {
-		return statutEnchere;
-	}
+    @NotNull(message = "La date de fin des enchères est obligatoire.")
+    private LocalDate dateFinEncheres;
 
-	public int getPrixInitial() {
-		return prixInitial;
-	}
+//    @NotNull(message = "Le statut de l'enchère est obligatoire.")
+//    private Integer statutEnchere;
 
-	public int getPrixVente() {
-		return prixVente;
-	}
+    @NotNull(message = "Le prix initial est obligatoire.")
+    @Min(value = 1, message = "Le prix initial doit être supérieur ou égal à 1.")
+    private Integer prixInitial;
 
-	public String getIdUtilisateur() {
-		return idUtilisateur;
-	}
+    private Integer prixVente;
 
-	public int getNoCategorie() {
-		return noCategorie;
-	}
+    @NotBlank(message = "L'identifiant de l'utilisateur est obligatoire.")
+    @Size(max = 30, message = "L'identifiant de l'utilisateur ne doit pas dépasser 30 caractères.")
+    private Utilisateur utilisateur;
 
-	public int getNoAdresseRetrait() {
-		return noAdresseRetrait;
-	}
-	
-	public String getFormattedDate() {
-	    return formattedDate;
-	}
+    @NotNull(message = "La catégorie est obligatoire.")
+    private Categorie categorie;
 
-	private String nomArticle;
-	private String description;
-	private int photo;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
-	private int statutEnchere; // 0, 1, 2, 3, 100
-	private int prixInitial;
-	private int prixVente;
-	private String idUtilisateur;
-	private int noCategorie;
-	private int noAdresseRetrait;
-	private String formattedDate;
+    @NotNull(message = "L'adresse de retrait est obligatoire.")
+    private Adresse adresse;
+    public ArticleAVendre() {
+    	this.utilisateur = new Utilisateur();
+    }
 
-    // Getters et Setters
-    // toString, hashCode, equals si nécessaire
-	
-	public void setNoArticle(int noArticle) {
-	    this.noArticle = noArticle;
-	}
+    public Integer getNoArticle() {
+        return noArticle;
+    }
 
-	public void setNomArticle(String nomArticle) {
-	    this.nomArticle = nomArticle;
-	}
+    public void setNoArticle(Integer noArticle) {
+        this.noArticle = noArticle;
+    }
 
-	public void setDescription(String description) {
-	    this.description = description;
-	}
+    public String getNomArticle() {
+        return nomArticle;
+    }
 
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
-	    this.dateDebutEncheres = dateDebutEncheres;
-	}
+    public void setNomArticle(String nomArticle) {
+        this.nomArticle = nomArticle;
+    }
 
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
-	    this.dateFinEncheres = dateFinEncheres;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setStatutEnchere(int statutEnchere) {
-	    this.statutEnchere = statutEnchere;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setPrixInitial(int prixInitial) {
-	    this.prixInitial = prixInitial;
-	}
+    public Integer getPhoto() {
+        return photo;
+    }
 
-	public void setPrixVente(int prixVente) {
-	    this.prixVente = prixVente;
-	}
+    public void setPhoto(Integer photo) {
+        this.photo = photo;
+    }
 
-	public void setIdUtilisateur(String idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
-	}
-	
-	public void setFormattedDate(String formattedDate) {
-	    this.formattedDate = formattedDate;
-	}
+    public LocalDate getDateDebutEncheres() {
+        return dateDebutEncheres;
+    }
+
+    public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+        this.dateDebutEncheres = dateDebutEncheres;
+    }
+
+    public LocalDate getDateFinEncheres() {
+        return dateFinEncheres;
+    }
+
+    public void setDateFinEncheres(LocalDate dateFinEncheres) {
+        this.dateFinEncheres = dateFinEncheres;
+    }
+
+//    public Integer getStatutEnchere() {
+//        return statutEnchere;
+//    }
+//
+//    public void setStatutEnchere(Integer statutEnchere) {
+//        this.statutEnchere = statutEnchere;
+//    }
+
+    public Integer getPrixInitial() {
+        return prixInitial;
+    }
+
+    public void setPrixInitial(Integer prixInitial) {
+        this.prixInitial = prixInitial;
+    }
+
+    public Integer getPrixVente() {
+        return prixVente;
+    }
+
+    public void setPrixVente(Integer prixVente) {
+        this.prixVente = prixVente;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.dateFinEncheres != null ? this.dateFinEncheres.format(formatter) : "Date non définie";
+    }
+    
+    //Résoudre SQL Warning dans la console et formulaire
+    
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Le statut de l'enchère est obligatoire.")
+    private StatutEnchere statutEnchere;
+
+    public StatutEnchere getStatutEnchere() {
+        return statutEnchere;
+    }
+
+    public void setStatutEnchere(StatutEnchere statutEnchere) {
+        this.statutEnchere = statutEnchere;
+    }
+
+    
+    public enum StatutEnchere {
+        PAS_COMMENCEE(0), EN_COURS(1), CLOTUREE(2), LIVREE(3), ANNULEE(100);
+
+        private final Integer code;
+
+        StatutEnchere(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static StatutEnchere fromCode(int code) {
+            for (StatutEnchere statut : values()) {
+                if (statut.getCode() == code) {
+                    return statut;
+                }
+            }
+            throw new IllegalArgumentException("Statut inconnu pour le code : " + code);
+        }
+    }
+    
+    @AssertTrue(message = "La date de début doit être antérieure à la date de fin.")
+    public boolean isDatesValides() {
+        if (dateDebutEncheres != null && dateFinEncheres != null) {
+            return dateDebutEncheres.isBefore(dateFinEncheres);
+        }
+        return true; // Laisse Jakarta Validation gérer les champs null
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleAVendre{" +
+                "noArticle=" + noArticle +
+                ", nomArticle='" + nomArticle + '\'' +
+                ", description='" + description + '\'' +
+                ", photo=" + photo +
+                ", dateDebutEncheres=" + dateDebutEncheres +
+                ", dateFinEncheres=" + dateFinEncheres +
+                ", statutEnchere=" + statutEnchere +
+                ", prixInitial=" + prixInitial +
+                ", prixVente=" + prixVente +
+                ", utilisateur='" + utilisateur + '\'' +
+                ", categorie=" + categorie +
+                ", adresse=" + adresse +
+                '}';
+    }
 
 }
+

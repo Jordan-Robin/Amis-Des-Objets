@@ -10,6 +10,8 @@
     <nav>
         <a data-th-if="${#authorization.expression('isAnonymous()')}" data-th-href="@{/create-profile}" data-th-text="#{frag-header.a.inscription}"></a>
         <a data-th-if="${#authorization.expression('isAnonymous()')}" data-th-href="@{/login}" data-th-text="#{frag-header.a.connection}"></a>
+        <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{'/sell-article'}"
+           data-th-text="#{frag-header.a.sellarticle}"></a>
         <a data-th-if="${#authorization.expression('isAuthenticated()')}" data-th-href="@{/profile/{pseudo}(pseudo=${#authentication.name})}"
            data-th-text="#{frag-header.a.profile}"></a>
         <a data-th-if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#"
