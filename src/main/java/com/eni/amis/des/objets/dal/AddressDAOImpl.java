@@ -1,7 +1,6 @@
 package com.eni.amis.des.objets.dal;
 
 import com.eni.amis.des.objets.bo.Adresse;
-import com.eni.amis.des.objets.bo.Utilisateur;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

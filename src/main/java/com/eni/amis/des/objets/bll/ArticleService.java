@@ -1,6 +1,6 @@
 package com.eni.amis.des.objets.bll;
 
-import com.eni.amis.des.objets.bo.ArticleAVendre;
+import com.eni.amis.des.objets.bo.Article;
 import com.eni.amis.des.objets.bo.Categorie;
 import com.eni.amis.des.objets.dal.ArticleDAO;
 import com.eni.amis.des.objets.dal.CategorieDAOImpl;
@@ -26,7 +26,7 @@ public class ArticleService {
      
      //--------Tâche Encheres Actives ----------
 
-    public List<ArticleAVendre> getEncheresActives() {
+    public List<Article> getEncheresActives() {
         return articleDAO.getEncheresActives();
     }
     
@@ -36,11 +36,11 @@ public class ArticleService {
     
     //methode create, appel article DAO, Tâche vendre un article
     
-    public void create (ArticleAVendre article) {
+    public void create (Article article) {
     	articleDAO.create(article);
     }
     
-    public void saveArticle (ArticleAVendre article, String pseudo) {
+    public void saveArticle (Article article, String pseudo) {
     	article.setUtilisateur(userDAO.findByPseudo(pseudo));
     	articleDAO.create(article);
     }

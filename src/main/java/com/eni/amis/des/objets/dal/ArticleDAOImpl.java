@@ -1,6 +1,6 @@
 package com.eni.amis.des.objets.dal;
 
-import com.eni.amis.des.objets.bo.ArticleAVendre;
+import com.eni.amis.des.objets.bo.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -30,15 +30,15 @@ public class ArticleDAOImpl implements ArticleDAO {
     //Tâche Encheres Actives
 
     @Override
-    public List<ArticleAVendre> getEncheresActives() {
+    public List<Article> getEncheresActives() {
         String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE statut_enchere = 1";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleAVendre.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Article.class));
     }
     
     //-----------
 
     @Override
-    public void create(ArticleAVendre article) {
+    public void create(Article article) {
     
     String sql = "INSERT INTO ARTICLES_A_VENDRE (nom_article, description, date_debut_encheres, " +
                 "date_fin_encheres, statut_enchere, prix_initial, id_utilisateur, no_categorie, no_adresse_retrait) " +
@@ -46,11 +46,11 @@ public class ArticleDAOImpl implements ArticleDAO {
                 ":idUtilisateur, :noCategorie, :noAdresseRetrait)";
 
    MapSqlParameterSource params = new MapSqlParameterSource();
-   params.addValue("nomArticle", article.getNomArticle());
+   params.addValue("nomArticle", article.getNom());
    params.addValue("description", article.getDescription());
    params.addValue("dateDebutEncheres", article.getDateDebutEncheres());
    params.addValue("dateFinEncheres", article.getDateFinEncheres());
-   params.addValue("statutEnchere", article.getStatutEnchere() != null ? article.getStatutEnchere() : 0);
+   params.addValue("statutEnchere", article.getStatut() != null ? article.getStatut() : 0);
    params.addValue("prixInitial", article.getPrixInitial());
    params.addValue("idUtilisateur", article.getUtilisateur().getPseudo());
    //params.addValue("noCategorie", article.getCategorie());
@@ -68,8 +68,8 @@ public class ArticleDAOImpl implements ArticleDAO {
    }
 
     @Override
-    public List<ArticleAVendre> findAll() {
+    public List<Article> findAll() {
         String sql = "SELECT * FROM ARTICLES_A_VENDRE";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleAVendre.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Article.class));
     }
 }

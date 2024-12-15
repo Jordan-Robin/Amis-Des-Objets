@@ -43,18 +43,18 @@ public class Adresse {
     public Adresse() {}
 
     public Adresse(Integer id, String rue, String codePostal, String ville, boolean adresseEni) {
-        this.id = id;
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
-        this.adresseEni = adresseEni;
+        setId(id);
+        setRue(rue);
+        setCodePostal(codePostal);
+        setVille(ville);
+        setAdresseEni(adresseEni);
     }
 
     public Adresse(String rue, String codePostal, String ville, boolean adresseEni) {
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
-        this.adresseEni = adresseEni;
+        setRue(rue);
+        setCodePostal(codePostal);
+        setVille(ville);
+        setAdresseEni(adresseEni);
     }
 
     public Integer getId() {

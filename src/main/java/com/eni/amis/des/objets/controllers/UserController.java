@@ -77,7 +77,7 @@ public class UserController {
             model.addAttribute("user", utilisateur);
             return "modify-profile";
         } else {
-            return "redirect:/"; // TODO message d'erreur (user inconnu ou vous n'avez pas les droits)
+            return "redirect:/";
         }
     }
 
@@ -86,7 +86,7 @@ public class UserController {
             BindingResult bindingResult, Principal principal) {
         // Vérifie si la personne qui demande à accéder à cette fiche utilisateur est bien l'utilisateur lui-même (permet également de vérifier côté serveur que l'utilisateur connecté ne tente pas de modifier son propre pseudo)
         if (!principal.getName().equals(utilisateur.getPseudo())) {
-            return "redirect:/"; // TODO créer message d'erreur (user inconnu ou vous n'avez pas les droits)
+            return "redirect:/";
         }
 
         if (bindingResult.hasErrors()) {

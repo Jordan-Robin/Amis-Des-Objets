@@ -5,8 +5,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
-
 public class Utilisateur {
 
     @NotBlank(message = "Le pseudo est obligatoire.", groups = {UserValidationGroups.CreateUser.class})
@@ -70,26 +68,6 @@ public class Utilisateur {
     private Adresse adresse;
 
     public Utilisateur() {}
-
-    public Utilisateur(
-            String pseudo,
-            String nom,
-            String prenom,
-            String email,
-            String telephone,
-            int credit,
-            boolean admin,
-            Adresse adresse
-                      ) {
-        this.pseudo = pseudo;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.telephone = telephone;
-        this.credit = credit;
-        this.admin = admin;
-        this.adresse = adresse;
-    }
 
     public String getPseudo() {
         return pseudo;
