@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserServicesImpl implements UserServices{
 
-    // TODO catch les erreurs dans la DAL pour confirmation à l'utilisateur de la bonne exécution du insert ou update
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
     private final AdresseService adresseService;

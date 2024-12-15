@@ -1,21 +1,28 @@
 package com.eni.amis.des.objets.bo;
 
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDateTime;
 
 public class Enchere {
 
-    private Integer idUtilisateur;
+    private String idUtilisateur;
+
     private Integer idArticle;
+
     private LocalDateTime date;
+
+    @NotNull(message = "Le montant doit être renseigné.")
+    @Min(value = 1, message = "Le montant de l'enchère doit être supérieur ou égal à 1.")
     private Integer montant;
 
     public Enchere() {}
 
-    public Integer getIdUtilisateur() {
+    public String getIdUtilisateur() {
         return idUtilisateur;
     }
 
-    public void setIdUtilisateur(Integer idUtilisateur) {
+    public void setIdUtilisateur(String idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
     }
 

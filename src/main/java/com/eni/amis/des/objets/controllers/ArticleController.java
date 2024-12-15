@@ -1,12 +1,11 @@
 package com.eni.amis.des.objets.controllers;
 
-import com.eni.amis.des.objets.bo.ArticleAVendre;
-import com.eni.amis.des.objets.bo.Adresse;
-import com.eni.amis.des.objets.bo.Categorie;
-import com.eni.amis.des.objets.dal.CategorieDAOImpl;
-import com.eni.amis.des.objets.bll.AdresseService;
 import com.eni.amis.des.objets.bll.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eni.amis.des.objets.bll.EnchereService;
+import com.eni.amis.des.objets.bo.Adresse;
+import com.eni.amis.des.objets.bo.Article;
+import com.eni.amis.des.objets.bo.Categorie;
+import com.eni.amis.des.objets.bll.AdresseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,23 +20,19 @@ public class ArticleController {
 	
     private final ArticleService articleService;
     private final AdresseService adresseService;
+    private final EnchereService enchereService;
 
-    public ArticleController(ArticleService articleService, AdresseService addressService) {
+    public ArticleController(ArticleService articleService, AdresseService addressService, EnchereService enchereService) {
         this.articleService = articleService;
         this.adresseService = addressService;
+        this.enchereService = enchereService;
     }
-    
-    @Autowired
-    private CategorieDAOImpl categorieDAOImpl;
 
-  //Tâche Page d’accueil en mode déconnecté
     @GetMapping("/")
     public String afficherEncheresActives(Model model) {
-        // Récupérer les enchères actives via le service
-        List<ArticleAVendre> encheresActives = articleService.getEncheresActives();
-        // Ajouter les enchères au modèle pour les afficher dans la vue
+        List<Article> encheresActives = enchereService.findAll();
         model.addAttribute("encheres", encheresActives);
-        return "index"; // Retourner la vue index.html
+        return "index";
     }
     
   //Tâche Vendre un article
@@ -51,7 +46,7 @@ public class ArticleController {
 
         model.addAttribute("categories", categories);
         model.addAttribute("adresses", adresses);
-        model.addAttribute("sellArticle", new ArticleAVendre());
+        model.addAttribute("sellArticle", new Article());
         
         System.out.println("Catégories : " + categories);
         System.out.println("Adresses : " + adresses);
@@ -60,7 +55,7 @@ public class ArticleController {
     }
     
     @PostMapping("/sell-article")
-    public String traiterFormulaireVente(@ModelAttribute("sellArticle") ArticleAVendre article, Model model, Principal principal) {
+    public String traiterFormulaireVente(@ModelAttribute("sellArticle") Article article, Model model, Principal principal) {
         if (article.getCategorie() == null || article.getCategorie().getNoCategorie() == 0) {
             model.addAttribute("error", "Veuillez sélectionner une catégorie valide.");
             return "sellArticle";
