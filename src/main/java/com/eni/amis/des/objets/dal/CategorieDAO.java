@@ -7,5 +7,6 @@ import java.util.List;
 public interface CategorieDAO {
 
     List<Categorie> findAll();
+    Categorie findById(int id);
 
 }

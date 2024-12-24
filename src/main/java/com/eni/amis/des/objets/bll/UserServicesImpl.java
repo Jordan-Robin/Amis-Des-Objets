@@ -21,6 +21,7 @@ public class UserServicesImpl implements UserServices{
         this.adresseService = adresseService;
     }
 
+    @Override
     @Transactional
     public void createUser(Utilisateur utilisateur) {
         BusinessException be = new BusinessException();
@@ -51,6 +52,7 @@ public class UserServicesImpl implements UserServices{
 
     }
 
+    @Override
     @Transactional
     public void modifyUser(Utilisateur utilisateur) {
         // If this email is not already used by another user, update profile's datas.
@@ -65,6 +67,7 @@ public class UserServicesImpl implements UserServices{
         }
     }
 
+    @Override
     public Utilisateur getByPseudo(String pseudo) {
         Utilisateur utilisateur = userDAO.findByPseudo(pseudo);
         utilisateur.setAdresse(adresseService.findById(utilisateur.getAdresse().getId()));

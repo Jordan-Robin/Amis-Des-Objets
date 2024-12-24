@@ -70,7 +70,7 @@ public class AddressDAOImpl implements AddressDAO {
     }
 
     @Override
-    public Adresse findById(long id) {
+    public Adresse findById(int id) {
         try {
             MapSqlParameterSource namedParameters = new MapSqlParameterSource();
             namedParameters.addValue("no_adresse", id);

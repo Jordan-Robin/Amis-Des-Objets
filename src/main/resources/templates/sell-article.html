@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head}
+      )}">
+<title data-th-text="#{view-sell-article.title}"></title>
+<th:block class="block-head">
+    <link rel="stylesheet" data-th-href="@{/css/sellArticle.css}">
+</th:block>
+
+<main>
+    <h1 data-th-text="#{view-sell-article.form.h1}"></h1>
+    
+    <form method="post" th:action="@{/sell-article}" th:object="${article}">
+        
+        <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="article" data-th-text="#{view-sell-article.form.article}"></label>
+            <input type="text" class="form-control" id="article" name="nomArticle" data-th-field="*{nom}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('nom')}"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="categorie" data-th-text="#{view-sell-article.form.categorie}"></label>
+            <select class="form-select" id="categorie" data-th-field="*{categorie}">
+                <option
+                    data-th-each="categorie : ${categoriesSession}"
+                    data-th-value="${categorie.id}"
+                    data-th-text="${categorie.libelle}"
+                ></option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="description" data-th-text="#{view-sell-article.form.description}"></label>
+            <textarea id="description" name="description" class="form-control" data-th-field="*{description}" required></textarea>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('description')}"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="miseAPrix" data-th-text="#{view-sell-article.form.miseaprix}"></label>
+            <input type="number" id="miseAPrix" class="form-control" name="miseAPrix" data-th-field="*{prixInitial}" min="1" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prixInitial')}"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="dateDebut" data-th-text="#{view-sell-article.form.datedebut}"></label>
+            <input type="date" id="dateDebut" class="form-control" name="dateDebut" data-th-field="*{dateDebutEncheres}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('dateDebutEncheres')}"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="dateFin" data-th-text="#{view-sell-article.form.datefin}"></label>
+            <input type="date" id="dateFin" class="form-control" name="dateFin" data-th-field="*{dateFinEncheres}" required>
+            <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('dateFinEncheres')}"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="adresse" data-th-text="#{view-sell-article.form.retrait}"></label>
+            <select class="form-select" id="adresse" data-th-field="*{adresse}">
+                <option
+                    data-th-each="adress : ${adressesSession}"
+                    data-th-value="${adress.id}"
+                    data-th-text="${adress.rue + ' ' + adress.ville}"
+                ></option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <div class="actions">
+                <button type="submit" class="btn btn-primary" data-th-text="#{view-sell-article.form.button.suivant}"></button>
+                <a data-th-href="@{'/'}">
+                    <button type="button" class="btn btn-danger" data-th-text="#{view-sell-article.form.button.annulerSimple}"></button>
+                </a>
+            </div>
+        </div>
+        
+    </form>
+</main>
+
+</html>

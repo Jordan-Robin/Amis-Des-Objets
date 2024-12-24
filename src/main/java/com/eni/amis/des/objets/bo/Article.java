@@ -1,6 +1,5 @@
 package com.eni.amis.des.objets.bo;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -26,18 +25,14 @@ public class Article {
     @Min(value = 1, message = "Le prix initial doit être supérieur ou égal à 1.")
     private Integer prixInitial;
 
-    @Min(value = 1, message = "Le prix initial doit être supérieur ou égal à 1.")
     private Integer prixVente;
 
-    private Integer statut;
+    private Statut statut;
 
-    @Valid
     private Utilisateur utilisateur;
 
-    @Valid
     private Categorie categorie;
 
-    @Valid
     private Adresse adresse;
 
     public Article() {}
@@ -98,11 +93,11 @@ public class Article {
         this.prixVente = prixVente;
     }
 
-    public Integer getStatut() {
+    public Statut getStatut() {
         return statut;
     }
 
-    public void setStatut(Integer statut) {
+    public void setStatut(Statut statut) {
         this.statut = statut;
     }
 
@@ -166,6 +161,23 @@ public class Article {
             throw new IllegalArgumentException("Code statut inconnu : " + code);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
+                ", dateDebutEncheres=" + dateDebutEncheres +
+                ", dateFinEncheres=" + dateFinEncheres +
+                ", prixInitial=" + prixInitial +
+                ", prixVente=" + prixVente +
+                ", statut=" + statut +
+                ", utilisateur=" + utilisateur +
+                ", categorie=" + categorie +
+                ", adresse_retrait=" + adresse +
+                '}';
     }
 
 }

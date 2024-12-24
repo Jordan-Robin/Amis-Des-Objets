@@ -1,79 +1,70 @@
 package com.eni.amis.des.objets.controllers;
 
 import com.eni.amis.des.objets.bll.ArticleService;
-import com.eni.amis.des.objets.bll.EnchereService;
+import com.eni.amis.des.objets.bll.CategorieService;
 import com.eni.amis.des.objets.bo.Adresse;
 import com.eni.amis.des.objets.bo.Article;
-import com.eni.amis.des.objets.bo.Categorie;
 import com.eni.amis.des.objets.bll.AdresseService;
+import com.eni.amis.des.objets.bo.Categorie;
+import com.eni.amis.des.objets.exceptions.BusinessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
 
 @Controller
+@SessionAttributes({"categoriesSession", "adressesSession"})
 public class ArticleController {
-	
+
     private final ArticleService articleService;
     private final AdresseService adresseService;
-    private final EnchereService enchereService;
+    private final CategorieService categorieService;
 
-    public ArticleController(ArticleService articleService, AdresseService addressService, EnchereService enchereService) {
+    public ArticleController(ArticleService articleService, AdresseService addressService,
+                             CategorieService categorieService) {
         this.articleService = articleService;
         this.adresseService = addressService;
-        this.enchereService = enchereService;
+        this.categorieService = categorieService;
+    }
+
+    @ModelAttribute("categoriesSession")
+    public List<Categorie> loadCategoriesSession() {
+        return this.categorieService.findAll();
+    }
+
+    @ModelAttribute("adressesSession")
+    public List<Adresse> loadAdressesSession() {
+        return this.adresseService.getAllAddresses();
     }
 
     @GetMapping("/")
     public String afficherEncheresActives(Model model) {
-        List<Article> encheresActives = enchereService.findAll();
-        model.addAttribute("encheres", encheresActives);
-        return "index";
+        List<Article> liste_articles_active = articleService.findAllActives();
+        model.addAttribute("encheres", liste_articles_active);
+        return "home";
     }
-    
-  //Tâche Vendre un article
-    
+
     @GetMapping("/sell-article")
     public String afficherFormulaireVente(Model model) {
-        List<Categorie> categories = categorieDAOImpl.getAllCategories();
-        List<Adresse> adresses = adresseService.getAllAddresses(); 
-        //List<String> adresses = adresseService.getAllAddresses();
-       // List<Adresse> adresses = recupererToutesLesAdressesDirectement();
-
-        model.addAttribute("categories", categories);
-        model.addAttribute("adresses", adresses);
-        model.addAttribute("sellArticle", new Article());
-        
-        System.out.println("Catégories : " + categories);
-        System.out.println("Adresses : " + adresses);
-
-        return "sellArticle";
+        Article article = new Article();
+        model.addAttribute("article", article);
+        return "sell-article";
     }
-    
+
     @PostMapping("/sell-article")
-    public String traiterFormulaireVente(@ModelAttribute("sellArticle") Article article, Model model, Principal principal) {
-        if (article.getCategorie() == null || article.getCategorie().getNoCategorie() == 0) {
-            model.addAttribute("error", "Veuillez sélectionner une catégorie valide.");
-            return "sellArticle";
-        }
-    	try {
-        	
-            //Sauvegarder l'article via ArticleService
-            articleService.saveArticle(article, principal.getName());
-
-            // Ajouter un message de succès dans le modèle
-            model.addAttribute("message", "Article mis en vente avec succès !");
-            return "redirect:/"; // Redirige vers la page d'accueil
-        } catch (Exception e) {
-            // En cas d'erreur, afficher un message et revenir au formulaire
-            model.addAttribute("error", "Erreur lors de la mise en vente de l'article.");
-            model.addAttribute("sellArticle", article); // Recharger l'article
-            return "sellArticle"; // Retour au formulaire
+    public String traiterFormulaireVente(@Validated @ModelAttribute("article") Article article,
+                                         BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "sell-article";
+        } else {
+            this.articleService.create(article, principal.getName());
+            return "redirect:/";
         }
     }
-    
+
 }

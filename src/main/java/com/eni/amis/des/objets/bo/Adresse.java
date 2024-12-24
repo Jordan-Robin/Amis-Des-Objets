@@ -4,7 +4,13 @@ import com.eni.amis.des.objets.bo.validation.UserValidationGroups;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
-public class Adresse {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Adresse implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 
@@ -41,21 +47,6 @@ public class Adresse {
     private boolean adresseEni;
 
     public Adresse() {}
-
-    public Adresse(Integer id, String rue, String codePostal, String ville, boolean adresseEni) {
-        setId(id);
-        setRue(rue);
-        setCodePostal(codePostal);
-        setVille(ville);
-        setAdresseEni(adresseEni);
-    }
-
-    public Adresse(String rue, String codePostal, String ville, boolean adresseEni) {
-        setRue(rue);
-        setCodePostal(codePostal);
-        setVille(ville);
-        setAdresseEni(adresseEni);
-    }
 
     public Integer getId() {
         return id;

@@ -22,7 +22,7 @@ public class AdresseServiceImpl implements AdresseService {
     }
 
     @Override
-    public Adresse findById(long id) {
+    public Adresse findById(int id) {
         return addressDAO.findById(id);
     }
 

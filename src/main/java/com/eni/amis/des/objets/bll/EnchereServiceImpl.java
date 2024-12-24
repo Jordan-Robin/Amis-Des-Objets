@@ -2,9 +2,11 @@ package com.eni.amis.des.objets.bll;
 
 import com.eni.amis.des.objets.bo.Enchere;
 import com.eni.amis.des.objets.dal.EnchereDAOImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EnchereServiceImpl implements EnchereService{
 
     private final EnchereDAOImpl enchereDAO;

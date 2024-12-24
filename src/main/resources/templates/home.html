@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout(
+      title=~{:: title},
+      main=~{:: main},
+      ressources=~{:: .block-head}
+      )}">
+<head>
+    <title>ENI-Enchères</title>
+    <th:block class="block-head">
+        <link rel="stylesheet" data-th-href="@{/css/home.css}">
+    </th:block>
+</head>
+
+<main class="mt-2">
+    
+    <div data-th-if="${param.logout}" class="error-text" data-th-text="#{message.deconnexionSuccess}"></div>
+    
+    <h1>Liste des enchères</h1>
+    
+    <div class="m-3">
+        <form>
+            <h2>Filtres :</h2>
+            <div>
+                <input type="text" placeholder="Le nom de l'article contient">
+                <button type="submit">Rechercher</button>
+            </div>
+            <div>
+                <select>
+                    <option value="" selected>Choisir une valeur</option>
+                    <option
+                            data-th-each="categorie : ${categoriesSession}"
+                            data-th-value="${categorie.id}"
+                            data-th-text="${categorie.libelle}"
+                            data-th-selected="${false}"
+                    ></option>
+                </select>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container m-2 row mx-auto">
+        <div data-th-each="enchere : ${encheres}" class="card mb-2 col-4">
+            <div class="row g-0">
+                <div class="col-md-2">
+                    <img src="" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title" data-th-text="${enchere.nom}"></h5>
+                        <p class="card-text" data-th-text="${'Prix : ' + enchere.prixInitial + ' point(s)'}"></p>
+                        <p class="card-text" data-th-text="${enchere.description}"></p>
+                        <p class="card-text" data-th-if="${#authorization.expression('isAnonymous()')}"
+                           data-th-text="${'Vendeur : ' + enchere.utilisateur.nom}"></p>
+                        <a class="card-text" data-th-if="${#authorization.expression('isAuthenticated()')}"
+                           data-th-text="${'Vendeur : ' + enchere.utilisateur.nom}" data-th-href="@{/profile/{pseudo}(pseudo=${enchere.utilisateur.pseudo})}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+
+</html>
